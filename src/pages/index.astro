@@ -1,9 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const cookie = Astro.request.headers.get('cookie');
-console.log(cookie)
+import Layout from "../layouts/Layout.astro";
+const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
+if(!cookie) return Astro.redirect("/signin");
+else {
+	let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
+		headers: {
+			"Authorization": cookie
+		}
+	})
+	.then(res => res.json())
+	.catch(_ => null)
+	.then(res => res);
+	
+	if(!user) return Astro.redirect("/signin");
+}
 ---
 
 <Layout title="My Account - Gravitalia Account">
-	<p>test</p>
+	<p>{cookie||"test"}</p>
 </Layout>
