@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SignIn from "../components/SignIn.vue";
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 if(cookie) {
     let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
@@ -20,31 +21,6 @@ if(cookie) {
         <span class="underline pr-1">Slow down! </span> You tried a password too many times... you were blocked for 5 minutes
     </p>
 
-    <div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
-        <div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
-            <br />
-            <img width="30" height="30" draggable="false" alt="Gravitalia logo" src="/favicon.webp" />
-            <p class="text-lg font-semibold">Let us connect you!</p>
-            <p class="hidden text-lg font-semibold">Votre code à deux facteurs</p>
-            <br /><br />
-            <label for="email" id="invalid_email_label" class="hidden text-sm text-red-500 w-full">Invalid email</label>
-            <input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder="Email adress" />
-            <label for="password" id="invalid_password_label" class="hidden text-sm text-red-500 w-full">Invalid password</label>
-            <div id="psw" class="hidden flex flex-col space-y-1">
-                <input id="password" type="password" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder="Password" />
-                <a href="/sign-in/password" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">Forgot your password?</a>
-            </div>
-            <div id="enter_mfa" class="hidden flex">
-
-            </div>
-
-            <div class="flex flex-wrap w-full">
-                <button id="back_btn" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-[#7f5af0] outline-none border border-indigo-100 dark:border-[#7f5af0] rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-[#7f5af0] hover:text-white transition-colors duration-200">
-                    Retour en arrière
-                </button>
-                <span class="pl-16 xl:pl-28">
-                </span>
-            </div>
-        </div>
-    </div>
+    <SignIn client:visible />
 </Layout>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
