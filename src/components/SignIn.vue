@@ -1,4 +1,8 @@
 <template>
+    <!-- CF Turnstile implementation -->
+    <div class="cf-turnstile" data-sitekey="yourSitekey" data-callback="javascriptCallback"></div>
+    <div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty"></div> 
+
     <div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
         <div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
             <br />
@@ -29,10 +33,6 @@
                         Suivant
                     </button>
                 </span>
-
-                <!-- CF Turnstile implementation -->
-                <div class="cf-turnstile" data-sitekey="yourSitekey" data-callback="javascriptCallback"></div>
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty"></div> 
             </div>
         </div>
     </div>
@@ -41,7 +41,9 @@
 <script>
     export default {
         data() {
-            return {}
+            return {
+                token: ""
+            }
         },
         methods: {
             async next() {
@@ -89,22 +91,30 @@
                 document.getElementById("invalid_password_label").classList.add("hidden");
             },
 
-            login(mfa) {
+            login(mfa = null) {
                 return new Promise(async (resolve, reject) => {
+                    if(this.token.length === 0) {
+                        const MATCH = document.getElementById("CF-Token-Generator").innerHTML.match(/value=".*">/gm);
+                        if(!MATCH) setTimeout(() => {return this.login(mfa)}, 1000);
+                        else this.token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
+                    }
+
                     if(document.getElementById("email").value === "") return resolve("email");
                     fetch("https://oauth.gravitalia.studio/login", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "CF-Turnstile-Token": token,
-                            "Sec": await window["fingerprint"]
+                            "CF-Turnstile-Token": this.token,
+                            "Sec": await window["fingerprint"]()
                         },
                         body: JSON.stringify({
                             email: document.getElementById("email")["value"],
                             password: document.getElementById("password").value === "" ? "Password1234(DontUsePls)" : document.getElementById("password").value,
                             mfa
                         })
-                    }).then(res => res.json())
+                    })
+                    .catch(_ => resolve("email"))
+                    .then(res => res.json())
                     .then(res => {
                         if(res?.message === "Invalid email") {
                             resolve("email");
