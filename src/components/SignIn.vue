@@ -22,14 +22,14 @@
             </div>
 
             <div class="flex flex-wrap w-full">
-                <a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-none outline-none border border-indigo-100 dark:border-[#7f5af0] rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-[#7f5af0] hover:text-white transition-colors duration-200">
+                <a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
                     Créer un compte
                 </a>
                 <button id="back_btn" @click="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-[#7f5af0] outline-none border border-indigo-100 dark:border-[#7f5af0] rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-[#7f5af0] hover:text-white transition-colors duration-200">
                     Retour en arrière
                 </button>
                 <span class="pl-16 xl:pl-28">
-                    <button id="next" @click="next()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] font-medium text-white disabled:opacity-75 disabled:cursor-not-allowed">
+                    <button id="next" @click="next()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
                         Suivant
                     </button>
                 </span>
@@ -44,6 +44,11 @@
             return {
                 token: ""
             }
+        },
+        mounted() {
+            document.onkeydown = (e) => {
+                if(e.code === "Enter") this.next();
+            };
         },
         methods: {
             async next() {
