@@ -1,7 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SignIn from "../components/SignIn.vue";
+import { t } from "../../Translator";
 
+const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
+Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
+"en";
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 if(cookie) {
     let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
@@ -19,7 +23,7 @@ if(cookie) {
 
 <Layout title="Sign in - Gravitalia Account" absolute={true}>
 	<p id="ratelimit" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <span class="underline pr-1">Slow down! </span> You tried a password too many times... you were blocked for 5 minutes
+        <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You tried a password too many times... you were blocked for 5 minutes", locale)}
     </p>
 
     <SignIn client:visible />
