@@ -1,5 +1,9 @@
 {
     "description": "Connecter le monde, permettre la liberté, voilà ce que fait Gravitalia. Laissez-nous vous connecter !",
+    "Slow down!": "Ralentissez !",
+    "You tried a password too many times... you were blocked for 5 minutes": "Vous avez essayé un mot de passe trop souvent... vous avez été bloqué pendant 5 minutes",
+    "You can only create an account every 5 minutes": "Vous ne pouvez créer un compte que toutes les 5 minutes",
+
     "tos": "Conditions Générales d'Utilisation",
     "tos_date": "Date d’effet :",
     "tos_welcome": "Bienvenue sur Gravitalia ! Ces présentes conditions régissent l’utilisation des services proposés, incluant les interfaces de programmation (API) ainsi que les obligations légales de nos deux partis.<br /><br />Gravitalia propose des lieux de partage, de mise en contact mais aussi des outils numériques ou physiques ayant pour but d’améliorer le respect de la vie privée.",

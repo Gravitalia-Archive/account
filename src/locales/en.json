@@ -1,5 +1,9 @@
 {
     "description": "Connecting the world, allowing freedom is what Gravitalia does. Let us connect you!",
+    "Slow down!": "Slow down!",
+    "You tried a password too many times... you were blocked for 5 minutes": "You tried a password too many times... you were blocked for 5 minutes",
+    "You can only create an account every 5 minutes": "You can only create an account every 5 minutes",
+    
     "tos": "Terms of Use",
     "tos_date": "Effective Date:",
     "tos_welcome": "Welcome on Gravitalia! These terms and conditions govern the use of the services offered, including the programming interfaces (APIs) and the legal obligations of both parties.<br /><br />Gravitalia offers places to share, to connect but also digital or physical tools to improve privacy.",
