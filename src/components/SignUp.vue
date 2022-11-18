@@ -21,10 +21,12 @@ console.log("test")
                 <input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder="Adresse e-mail" />
                 <br />
                 <input id="password" type="password" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder="Mot de passe" />
-                <p id="password-tips" class="text-xs w-full dark:text-gray-300 ">Au moins 8 caractères avec chiffres et symboles</p>
+                <p id="password-tips" class="text-xs w-full dark:text-gray-300">Au moins 8 caractères avec chiffres et symboles</p>
             </div>
 
             <div id="second" class="hidden">
+                <label for="birth">Date de naissance <span class="text-xs w-full dark:text-gray-300">(champ facultatif)</span></label>
+                <br />
                 <input id="birth" type="date" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder="Date de naissance" />
             </div>
 
@@ -59,7 +61,11 @@ console.log("test")
         },
         methods: {
             next() {
-
+                if(!document.getElementById("first")?.classList.value.includes("hidden")) {
+                    if((<HTMLInputElement>document.getElementById("email")).value.match("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,7})$")) return;
+                    document.getElementById("first")?.classList.add("hidden");
+                    document.getElementById("second")?.classList.remove("hidden");
+                }
             },
 
             back() {
