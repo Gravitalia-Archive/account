@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SignUp from "../components/SignUp.vue";
+import { t } from "../../Translator";
+
+const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
+Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
+"en";
+const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
+if(cookie) {
+    let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
+		headers: {
+			"Authorization": cookie
+		}
+	})
+	.then(res => res.json())
+	.catch(_ => null)
+	.then(res => res);
+	
+	if(user?.username) return Astro.redirect("/");
+}
+---
+
+<Layout title="Sign up - Gravitalia Account" absolute={true}>
+	<p id="ratelimit" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+        <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You can only create an account every 5 minutes", locale)}
+    </p>
+
+	<SignUp client:visible />
+</Layout>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
