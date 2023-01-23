@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SignIn from "../components/SignIn.vue";
 import { t } from "../../Translator";
 
 const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
@@ -23,9 +22,50 @@ if(cookie) {
 
 <Layout title="Sign in - Gravitalia Account" absolute={true}>
 	<p id="ratelimit" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You tried a password too many times... you were blocked for 5 minutes", locale)}
-    </p>
-
-    <SignIn client:visible />
+		<span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You tried a password too many times... you were blocked for 5 minutes", locale)}
+	</p>
+	
+	<!-- CF Turnstile implementation -->
+	<div class="cf-turnstile" data-sitekey="yourSitekey" data-callback="javascriptCallback"></div>
+	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty"></div>
+	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
+		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
+			<br />
+			<img width="30" height="30" draggable="false" alt="Gravitalia logo" src="/favicon.webp" />
+			<p class="text-lg font-semibold">{t("Let us connect you!", locale)}</p>
+			<p class="hidden text-lg font-semibold">{t("Your two-factor code", locale)}</p>
+			<br /><br />
+			<label for="email" id="invalid_email_label" class="hidden text-sm text-red-500 w-full">{t("Invalid email", locale)}</label>
+			<input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Email adress", locale)} />
+			<label for="password" id="invalid_password_label" class="hidden text-sm text-red-500 w-full">{t("Invalid password", locale)}</label>
+			<div id="psw" class="hidden flex flex-col space-y-1">
+				<input id="password" type="password" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Password", locale)} />
+				<a href="/sign-in/password" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">{t("Forgot your password?", locale)}</a>
+			</div>
+			<div id="enter_mfa" class="hidden flex">
+				<input autofocus id="1" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="2" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="3" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="4" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="5" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="6" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+			</div>
+			<div class="flex flex-wrap w-full">
+				<a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+					{t("Create account", locale)}
+				</a>
+				<button id="back_btn" onclick="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-[#7f5af0] outline-none border border-indigo-100 dark:border-[#7f5af0] rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-[#7f5af0] hover:text-white transition-colors duration-200">
+					{t("Back", locale)}
+				</button>
+				<span class="pl-16 xl:pl-28">
+				<button id="next" onclick="next()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
+					{t("Next", locale)}
+				</button>
+				</span>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<script src="/signin.js" is:inline></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

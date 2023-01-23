@@ -1,5 +1,6 @@
 {
     "description": "Connecter le monde, permettre la liberté, voilà ce que fait Gravitalia. Laissez-nous vous connecter !",
+    "Let us connect you!": "Laissez-nous vous connecter !",
     "Slow down!": "Ralentissez !",
     "You tried a password too many times... you were blocked for 5 minutes": "Vous avez essayé un mot de passe trop souvent... vous avez été bloqué pendant 5 minutes",
     "You can only create an account every 5 minutes": "Vous ne pouvez créer un compte que toutes les 5 minutes",
@@ -46,6 +47,11 @@
 
     "Terms": "Conditions d’utilisation",
     "Privacy": "Confidentialité",
+    "Support": "Support",
+    "Jobs": "Emplois",
+    "Blog": "Blog",
+    "Home": "Accueil",
+    "Sign in": "Connexion",
 
     "pp": "Politique de confidentialité",
     "privacy_welcome": "Bienvenue chez Gravitalia ! Avant de créer un compte, il peut être intéressant de lire et de savoir comment vos données sont utilisées et traitées.<br /><br />Chez nous, nous nous efforçons de garantir : la sécurité, la fiabilité et surtout le respect de la vie privée ! Nous ne revendons rien et nous n’utilisons aucune donnée récoltée à des fins publicitaires !<br /><i class=\"text-sm\">Les définitions décrites dans les Conditions Générales d’Utilisation s’appliquent aussi ici.</i>",
@@ -69,5 +75,23 @@
     "Your rights": "Vos droits",
     "privacy_rights": "Chaque Service propose dans les “Paramètres” une partie (généralement nommée “Données”) vous permettant d’accéder à votre :<br /><br />- <b>Droit d’accès</b> : qui vous permet de télécharger les données recueillies à votre propos. Veuillez noter que les informations : bancaires, mot de passes et adresse e-mail ne sont pas fournies lors du téléchargement des données.<br />- <b>Droit d’effacement</b> : qui vous laisse la possibilité de supprimer votre compte globalement ou individuellement. Quand ce droit est appliqué, votre compte est supprimé sous 1 mois (compte récupérable), sauf pour les comptes liés à chaque Service qui est supprimé instantanément, puis les données personnelles (nom d’utilisateur, mot de passe, adresse IP...) hors adresse e-mail (non récupérable, hachée).<br />- <b>Droit de rectification</b> : vous pouvez à tout moment modifié, via la section “Paramètres” toutes les informations récoltées vous concernant.<br />- <b>Droit à l’oubli</b> : ce droit requiert de nous contacter par mail. Veuillez rajouter dans l’objet du mail le droit à l’oubli et nous contacter via contact@gravitalia.com munit de votre carte d’identité.<br />- <b>Droit de retrait</b> : lorsque vous vous inscrivez, vous acceptez et approuvez avoir lu les contrats néanmoins, vous pouvez à tout moment décider d’arrêter votre engagement. Pour ce faire, il vous suffit de suivre les instructions du droit d’effacement ; vous ne pouvez plus utiliser nos Services si vous ne souhaitez plus respecter nos contrats.",
     "Contact us": "Nous contacter",
-    "privacy_contact": "Vous pouvez nous contacter via <a href=\"mailto:privacy@gravitalia.com\">privacy@gravitalia.com</a> pour toute question en rapport avec cette Politique de Confidentialité. Nous sommes à votre écoute et ravis de vous aider !<br /><br />Pour contacter notre délégué à la protection des données, vous pouvez vous adresser à <a href=\"mailto:dpo@gravitalia.com\">dpo@gravitalia.com</a>.<br /><br />Bonne utilisation de nos Services !"
+    "privacy_contact": "Vous pouvez nous contacter via <a href=\"mailto:privacy@gravitalia.com\">privacy@gravitalia.com</a> pour toute question en rapport avec cette Politique de Confidentialité. Nous sommes à votre écoute et ravis de vous aider !<br /><br />Pour contacter notre délégué à la protection des données, vous pouvez vous adresser à <a href=\"mailto:dpo@gravitalia.com\">dpo@gravitalia.com</a>.<br /><br />Bonne utilisation de nos Services !",
+
+    "Your two-factor code": "Votre code à deux facteurs",
+    "Invalid email": "Adresse e-mail invalide",
+    "Invalid password": "Mot de passe invalide",
+    "Forgot your password?": "Mot de passe oublié ?",
+    "Create account": "Créer un compte",
+    "Back": "Retour en arrière",
+    "Next": "Suivant",
+    "Email adress": "Adresse e-mail",
+    "Password": "Mot de passe",
+
+    "Firstname": "Prénom",
+    "Name": "Nom",
+    "At least 8 characters with numbers and symbols": "Au moins 8 caractères avec chiffres et symboles",
+    "Username": "Nom d'utilisateur",
+    "Birthdate": "Date de naissance",
+    "(optional field)": "(champ facultatif)",
+    "accept_tos_privacy": "Vous acceptez nos <a href=\"/terms\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">CGU</a> et notre <a href=\"/privacy\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">politique de confidentialité</a>"
 }
