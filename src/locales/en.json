@@ -1,5 +1,6 @@
 {
     "description": "Connecting the world, allowing freedom is what Gravitalia does. Let us connect you!",
+    "Let us connect you!": "Let us connect you!",
     "Slow down!": "Slow down!",
     "You tried a password too many times... you were blocked for 5 minutes": "You tried a password too many times... you were blocked for 5 minutes",
     "You can only create an account every 5 minutes": "You can only create an account every 5 minutes",
@@ -46,6 +47,11 @@
 
     "Terms": "Terms",
     "Privacy": "Privacy",
+    "Support": "Support",
+    "Jobs": "Jobs",
+    "Blog": "Blog",
+    "Home": "Home",
+    "Sign in": "Sign in",
 
     "pp": "Privacy Policy",
     "privacy_welcome": "Welcome to Gravitalia! Before creating an account, it may be interesting to read and know how your data is used and processed.<br /><br />With us, we strive to guarantee: security, reliability and above all respect for private life ! We do not resell anything and we do not use any data collected for advertising purposes!<br /><i class=\"text-sm\">The definitions described in the General Conditions of Use also apply here.</i>",
@@ -69,5 +75,23 @@
     "Your rights": "Your rights",
     "privacy_rights": "Each Service offers in the “Settings” a part (generally called “Data”) allowing you to access your:<br /><br />- <b>Access right</b>: which allows you to download the data collected about you. Please note that the information: banking, password and e-mail address are not provided when downloading the data.<br />- <b>Right to erasure</b>: which gives you the possibility to delete your account globally or individually. When this right is applied, your account is deleted within 1 month (recoverable account), except for accounts linked to each Service which is deleted instantly, then the personal data (username, password, IP address... ) excluding e-mail address (non-recoverable, hashed).<br />- <b>Right of rectification</b>: you can modify at any time, via the “Settings” section, all the information collected about you.<br />- <b>Right to be forgotten</b>: this right requires you to contact us by email. Please add the right to be forgotten in the subject of the email and contact us via contact@gravitalia.com with your identity card.<br />- <b>Right of withdrawal</b>: when you register, you accept and approve having read the contracts, however, you can decide at any time to stop your commitment. To do this, simply follow the instructions of the right to erasure; you can no longer use our Services if you no longer wish to comply with our contracts.",
     "Contact us": "Contact us",
-    "privacy_contact": "You can contact us via <a href=\"mailto:privacy@gravitalia.com\">privacy@gravitalia.com</a> with any questions regarding this Privacy Policy. We're here to help and happy to help!<br /><br />To contact our Data Protection Officer, you can write to <a href=\"mailto:dpo@gravitalia.com\"> dpo@gravitalia.com</a>.<br /><br />Enjoy the use of our Services!"
+    "privacy_contact": "You can contact us via <a href=\"mailto:privacy@gravitalia.com\">privacy@gravitalia.com</a> with any questions regarding this Privacy Policy. We're here to help and happy to help!<br /><br />To contact our Data Protection Officer, you can write to <a href=\"mailto:dpo@gravitalia.com\"> dpo@gravitalia.com</a>.<br /><br />Enjoy the use of our Services!",
+
+    "Your two-factor code": "Your two-factor code",
+    "Invalid email": "Invalid email",
+    "Invalid password": "Invalid password",
+    "Forgot your password?": "Forgot your password?",
+    "Create account": "Create an account",
+    "Back": "Back",
+    "Next": "Continue",
+    "Email adress": "Email adress",
+    "Password": "Password",
+
+    "Firstname": "Firstname",
+    "Name": "Name",
+    "At least 8 characters with numbers and symbols": "At least 8 characters with numbers and symbols",
+    "Username": "Username",
+    "Birthdate": "Birthdate",
+    "(optional field)": "(optional field)",
+    "accept_tos_privacy": "You agree to our <a href=\"/terms\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">ToS</a> and our <a href=\"/privacy\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">privacy policy</a>"
 }
