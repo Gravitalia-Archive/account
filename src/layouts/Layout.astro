@@ -39,12 +39,12 @@ const { title, absolute = false } = Astro.props;
 		<slot />
 
 		<div class={absolute ? "absolute bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white" : "bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white"}>
-			<a href="/" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">{session ? "Home" : "Sign in"}</a>
-			<a href="https://blog.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">Blog</a>
-			<a href="https://jobs.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">Jobs</a>
-			<a href="https://support.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">Support</a>
-			<a href="/terms" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">Terms</a>
-			<a href="/privacy" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">Privacy</a>
+			<a href="/" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">{session ? t('Home', locale) : t('Sign in', locale)}</a>
+			<a href="https://blog.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">{t("Blog", locale)}</a>
+			<a href="https://jobs.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">{t("Jobs", locale)}</a>
+			<a href="https://support.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">{t("Support", locale)}</a>
+			<a href="/terms" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">{t("Terms", locale)}</a>
+			<a href="/privacy" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">{t("Privacy", locale)}</a>
 		</div>
 	</body>
 </html>
