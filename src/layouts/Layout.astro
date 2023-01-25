@@ -8,7 +8,7 @@ const session = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[
 
 export interface Props {
 	title: string;
-	absolute: boolean;
+	absolute: any;
 }
 
 const { title, absolute = false } = Astro.props;
@@ -38,7 +38,7 @@ const { title, absolute = false } = Astro.props;
 	<body class="dark:bg-zinc-900 dark:text-white">
 		<slot />
 
-		<div class={absolute ? "absolute bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white" : "bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white"}>
+		<div class={absolute === null ? "hidden" : absolute ? "absolute bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white" : "bottom-0 w-full p-3 bg-stone-100 dark:bg-zinc-800 flex justify-center items-center space-x-3 text-[14px] font-medium text-[#666] dark:text-white"}>
 			<a href="/" rel="prefetch" class="hover:underline underline-offset-1 cursor-pointer">{session ? t('Home', locale) : t('Sign in', locale)}</a>
 			<a href="https://blog.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">{t("Blog", locale)}</a>
 			<a href="https://jobs.gravitalia.studio/" target="_blank" class="hover:underline underline-offset-1 cursor-pointer">{t("Jobs", locale)}</a>
