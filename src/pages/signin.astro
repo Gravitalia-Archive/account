@@ -26,8 +26,7 @@ if(cookie) {
 	</p>
 	
 	<!-- CF Turnstile implementation -->
-	<div class="cf-turnstile" data-sitekey="yourSitekey" data-callback="javascriptCallback"></div>
-	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty"></div>
+	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty" data-theme="auto" data-language={locale} data-callback=cf_callback></div>
 	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
 		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
 			<br />
@@ -181,6 +180,10 @@ if(cookie) {
 				document.getElementById(`${Id+1}`)["value"] = "";
 			}
 		}
+	}
+	
+	function cf_callback(token) {
+		console.log(token)
 	}
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
