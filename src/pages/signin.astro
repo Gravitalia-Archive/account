@@ -127,7 +127,6 @@ if(cookie) {
 				headers: {
 					"Content-Type": "application/json",
 					"CF-Turnstile-Token": cf_token,
-					"Sec": await window["fingerprint"]()
 				},
 				body: JSON.stringify({
 					email: document.getElementById("email")["value"],
@@ -184,6 +183,7 @@ if(cookie) {
 	}
 	
 	function cf_callback(token) {
+		console.log(token)
 		cf_callback = token;
 	}
 </script>
