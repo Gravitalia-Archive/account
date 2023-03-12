@@ -25,9 +25,7 @@ if(cookie) {
         <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You can only create an account every 5 minutes", locale)}
     </p>
 
-	<!-- CF Turnstile implementation -->
-	<div class="cf-turnstile" data-sitekey="yourSitekey" data-callback="javascriptCallback"></div>
-	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty"></div>
+	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty" data-theme="auto" data-language={locale} data-callback="cf_callback"></div>
 	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
 		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-md">
 			<img width="30" height="30" draggable="false" alt="Gravitalia logo" src="/favicon.webp" />
@@ -77,6 +75,8 @@ if(cookie) {
 </Layout>
 
 <script lang="js">
+	let cf_token = "";
+
 	async function next() {
 		if(!document.getElementById("first")?.classList.value.includes("hidden")) {
 			if(!document.getElementById("firstname").value || document.getElementById("firstname").value.length >= 16) {
@@ -113,9 +113,9 @@ if(cookie) {
 				document.getElementById("vanity_div")?.classList.remove("border-red-500");
 				document.getElementById("birth")?.classList.remove("border-red-500");
 
-				const res = await this.create();
+				const res = await create();
 				if(res === "email") {
-					this.back();
+					back();
 					document.getElementById("email")?.classList.add("border-red-500");
 				} else if(res === "vanity") {
 					document.getElementById("vanity_div")?.classList.add("border-red-500");
@@ -133,10 +133,10 @@ if(cookie) {
 
 	function create() {
 		return new Promise(async (resolve, reject) => {
-			if(this.token.length === 0) {
+			if(cf_token.length === 0) {
 				const MATCH = document.getElementById("CF-Token-Generator").innerHTML.match(/value=".*">/gm);
-				if(!MATCH) setTimeout(() => {return this.create()}, 1000);
-				else this.token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
+				if(!MATCH) setTimeout(() => {return create()}, 1000);
+				else cf_token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
 			}
 
 			if(document.getElementById("email").value === "") return resolve("email");
@@ -144,7 +144,7 @@ if(cookie) {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"CF-Turnstile-Token": this.token,
+					"CF-Turnstile-Token": cf_token,
 					"Sec": await window.fingerprint()
 				},
 				body: JSON.stringify({
@@ -169,6 +169,10 @@ if(cookie) {
 				}
 			});
 		});
+	}
+
+	function cf_callback(token) {
+		cf_token = token;
 	}
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
