@@ -32,7 +32,6 @@ const { title, absolute = false } = Astro.props;
 			"dark" === localStorage.mode && document.documentElement.classList.add("dark"),localStorage.mode ||(window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {e.matches ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark");}),window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.classList.add("dark"));
 			"serviceWorker" in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")});
 		</script>
-		<script src="/gsecurity.js" is:inline></script>
 		<noscript><p class="flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8"><span class="underline pr-1">We need JavaScript </span> for your safety and the safety of others. Please turn it back on or change your browser.</p></noscript>
 	</head>
 	<body class="dark:bg-zinc-900 dark:text-white">
