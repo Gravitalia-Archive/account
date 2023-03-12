@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 if(!cookie) return Astro.redirect("/signin");
 else {
-	let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
+	let user = await fetch("https://oauth.gravitalia.com/users/@me", {
 		headers: {
 			"Authorization": cookie
 		}

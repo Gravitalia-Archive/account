@@ -7,7 +7,7 @@ Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
 "en";
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 if(cookie) {
-    let user = await fetch("https://oauth.gravitalia.studio/users/@me", {
+    let user = await fetch("https://oauth.gravitalia.com/users/@me", {
 		headers: {
 			"Authorization": cookie
 		}
@@ -121,7 +121,7 @@ if(cookie) {
 			}
 
 			if(document.getElementById("email").value === "") return resolve("email");
-			fetch("https://oauth.gravitalia.studio/login", {
+			fetch("https://oauth.gravitalia.com/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
