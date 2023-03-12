@@ -22,7 +22,7 @@ if(cookie) {
 
 <Layout title="Sign up - Gravitalia Account" absolute={true}>
 	<p id="ratelimit" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You can only create an account every 5 minutes", locale)}
+        <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You can only create an account every 5 minutes", locale)}.
     </p>
 
 	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty" data-theme="auto" data-language={locale} data-callback="cf_callback"></div>
@@ -119,6 +119,11 @@ if(cookie) {
 					document.getElementById("email")?.classList.add("border-red-500");
 				} else if(res === "vanity") {
 					document.getElementById("vanity_div")?.classList.add("border-red-500");
+				} else if(res === "ratelimit") {
+					document.getElementById("ratelimit").classList.remove("hidden");
+					setTimeout(() => {
+						document.getElementById("ratelimit").classList.add("hidden");
+					}, 5000*60)
 				}
 			}
 		}
@@ -164,7 +169,10 @@ if(cookie) {
 				} else if(res?.error) {
 					resolve("ratelimit");
 				} else {
-					resolve(res.token);
+					document.cookie = `session=${res.token}; max-age=5256000; SameSite=strict; secure;`;
+					setTimeout(() => {
+						window.location.href = "/";
+					}, 500)
 				}
 			});
 		});
