@@ -169,7 +169,7 @@ if(cookie) {
 				} else if(res?.error) {
 					resolve("ratelimit");
 				} else {
-					document.cookie = `session=${res.token}; max-age=5256000; SameSite=strict; secure;`;
+					document.cookie = `session=${res.message}; max-age=5256000; SameSite=strict; secure;`;
 					setTimeout(() => {
 						window.location.href = "/";
 					}, 500)
