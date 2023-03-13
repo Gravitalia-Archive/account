@@ -17,7 +17,9 @@ if(cookie) {
 	.catch(_ => null)
 	.then(res => res);
 	
-	if(user?.message) return Astro.redirect("/");
+	if(user?.message) return Astro.redirect("/signin");
+} else {
+	return Astro.redirect("/signin");
 }
 ---
 
