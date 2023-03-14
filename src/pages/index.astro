@@ -24,8 +24,8 @@ if(cookie) {
 ---
 
 <Layout title="My Account - Gravitalia Account" absolute={null}>
-	<main class="min-h-screen w-full text-gray-700">
-		<header class="flex w-full items-center justify-between bg-white p-2">
+	<main class="min-h-screen w-full text-gray-700 dark:text-white">
+		<header class="flex w-full items-center justify-between bg-white dark:bg-zinc-800 p-2">
 			<div class="flex items-center space-x-2">
 				<img src="/favicon.webp" class="h-8 w-8" />
 				<h1 class="pl-2 text-xl font-bold">Gravitalia</h1>
@@ -39,8 +39,8 @@ if(cookie) {
 		</header>
 	
 		<div class="flex">
-			<aside class="flex w-72 flex-col space-y-2 bg-white pt-4" style="height: 90.5vh">
-				<span class="flex items-center space-x-1 rounded-r-full px-2 py-3 bg-indigo-200 text-indigo-600">
+			<aside class="flex w-72 flex-col space-y-2 bg-white dark:bg-zinc-800 pt-4" style="height: 90.5vh">
+				<span class="flex items-center space-x-1 rounded-r-full px-2 py-3 bg-indigo-200 dark:bg-indigo-400 text-indigo-200 dark:text-white">
 					<span class="text-2xl pl-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
 							<path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
@@ -49,7 +49,7 @@ if(cookie) {
 					<span class="font-medium">About</span>
 				</span>
 	
-				<a href="/security" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600">
+				<a href="/security" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600 hover:dark:bg-indigo-400 hover:dark:text-white">
 					<span class="text-2xl pl-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
 							<path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
@@ -58,7 +58,7 @@ if(cookie) {
 					<span class="font-medium">Security</span>
 				</a>
 	
-				<a href="/data" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600">
+				<a href="/data" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600 hover:dark:bg-indigo-400 hover:dark:text-white">
 					<span class="text-2xl pl-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
 							<path fill-rule="evenodd" d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm14.25 6a.75.75 0 01-.22.53l-2.25 2.25a.75.75 0 11-1.06-1.06L15.44 12l-1.72-1.72a.75.75 0 111.06-1.06l2.25 2.25c.141.14.22.331.22.53zm-10.28-.53a.75.75 0 000 1.06l2.25 2.25a.75.75 0 101.06-1.06L8.56 12l1.72-1.72a.75.75 0 10-1.06-1.06l-2.25 2.25z" clip-rule="evenodd" />
@@ -67,7 +67,7 @@ if(cookie) {
 					<span class="font-medium">Data</span>
 				</a>
 
-				<a href="/oauth" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600">
+				<a href="/oauth" class="flex items-center space-x-1 rounded-r-full px-2 py-3 hover:bg-indigo-200 hover:text-indigo-600 hover:dark:bg-indigo-400 hover:dark:text-white">
 					<span class="text-2xl pl-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
 							<path fill-rule="evenodd" d="M12 3.75a6.715 6.715 0 00-3.722 1.118.75.75 0 11-.828-1.25 8.25 8.25 0 0112.8 6.883c0 3.014-.574 5.897-1.62 8.543a.75.75 0 01-1.395-.551A21.69 21.69 0 0018.75 10.5 6.75 6.75 0 0012 3.75zM6.157 5.739a.75.75 0 01.21 1.04A6.715 6.715 0 005.25 10.5c0 1.613-.463 3.12-1.265 4.393a.75.75 0 01-1.27-.8A6.715 6.715 0 003.75 10.5c0-1.68.503-3.246 1.367-4.55a.75.75 0 011.04-.211zM12 7.5a3 3 0 00-3 3c0 3.1-1.176 5.927-3.105 8.056a.75.75 0 11-1.112-1.008A10.459 10.459 0 007.5 10.5a4.5 4.5 0 119 0c0 .547-.022 1.09-.067 1.626a.75.75 0 01-1.495-.123c.041-.495.062-.996.062-1.503a3 3 0 00-3-3zm0 2.25a.75.75 0 01.75.75A15.69 15.69 0 018.97 20.738a.75.75 0 01-1.14-.975A14.19 14.19 0 0011.25 10.5a.75.75 0 01.75-.75zm3.239 5.183a.75.75 0 01.515.927 19.415 19.415 0 01-2.585 5.544.75.75 0 11-1.243-.84 17.912 17.912 0 002.386-5.116.75.75 0 01.927-.515z" clip-rule="evenodd" />
@@ -79,10 +79,10 @@ if(cookie) {
 	
 			<div class="w-full p-4">
 				<p class="text-2xl font-semibold pb-4">Your public profile</p>
-				<div class="pt-4 pl-4 border shadow-xs w-1/2 h-96 rounded-md">
+				<div class="pt-4 pl-4 border dark:border-none dark:bg-zinc-800 shadow-xs w-1/2 h-96 rounded-md">
 					<div align="center" class="space-y-4">
 						<img class="rounded-full" src= {user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].toUpperCase()}.webp`} width="120" alt="" />
-						<input type="text" placeholder={user.username} value={user.username} class="border pl-2 max-w-4 text-xl font-semibold">
+						<input type="text" placeholder={user.username} value={user.username} class="border focus:outline-none dark:border-zinc-900 dark:bg-zinc-900 rounded-sm pl-2 max-w-4 text-xl font-semibold">
 					</div>
 				</div>
 			</div>

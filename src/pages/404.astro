@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../../Translator";
+
+const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
+Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
+"en";
+const session = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
+---
+
+<Layout title="404 - Gravitalia Account" absolute={true}>
+    <div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex flex-col justify-center items-center">
+        <h1 class="text-[#332b43] dark:text-indigo-400 font-bold text-7xl">404</h1>
+        <br />
+        <a href="/"><button class="mt-4 text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
+            {session ? t('Home', locale) : t('Sign in', locale)}
+        </button></a>
+    </div>
+</Layout>
