@@ -8,7 +8,6 @@ Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 
 if(!Astro.url.searchParams.get("client_id") || !Astro.url.searchParams.get("redirect_uri") || !Astro.url.searchParams.get("scope")) return Astro.redirect("/oauth2/error");
-
 let user;
 if(cookie) {
     user = await fetch("https://oauth.gravitalia.com/users/@me", {
@@ -24,7 +23,6 @@ if(cookie) {
 } else {
 	return Astro.redirect(`/signin?redirect=${window.location.href.replace(window.location.host, "").replace(/http[s]?:\/\//g, "")}`);
 }
-console.log(Astro.url.searchParams.get("client_id"))
 let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchParams.get("client_id")}`, {
 		headers: {
 			"Authorization": cookie
@@ -34,7 +32,7 @@ let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchPara
 	.catch(_ => null)
 	.then(res => res);
 
-if(bot?.error) return Astro.redirect("/oauth2/error");
+if(bot?.error) return Astro.redirect("/oauth2/error?message=Invalid%20bot");
 ---
 
 <Layout title="Authorize - Gravitalia Account" absolute={null}>
@@ -48,17 +46,69 @@ if(bot?.error) return Astro.redirect("/oauth2/error");
 						<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
 					</svg>
 				</div>
-				<p class="ml-2">Access to username and avatar</p>
+				<p class="ml-2">{t("Access to username and avatar", locale)}</p>
 			</div>
 			<br /><br />
 			<div class="flex justify-between w-full">
-				<a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+				<a href={`${Astro.url.searchParams.get("redirect_uri")}?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request${Astro.url.searchParams.get("state")?"&state="+Astro.url.searchParams.get("state"):""}`} class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
 					{t("Cancel", locale)}
 				</a>
-				<button id="next" onclick="next()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
+				<button id="next" onclick="authorize()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
 					{t("Authorize", locale)}
 				</button>
 			</div>
 		</div>
 	</div>	
 </Layout>
+
+<script lang="js">
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+		get: (searchParams, prop) => searchParams.get(prop),
+	});
+
+	fetch("https://oauth.gravitalia.com/oauth2", {
+		method: "POST",
+		headers: {
+			"Authorization": `; ${document.cookie}`?.split(`; session=`)[1]?.split(";")[0],
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			response_type: params?.response_type||"code",
+			bot_id: params.client_id,
+			redirect_uri: params.redirect_uri,
+			scope: "identity"
+		})
+	})
+	.then(res => res.json())
+	.then(res => {
+		if(!res.message.includes("Invalid") && res.message !== "") return window.location.href = `${params.redirect_uri}?${params?.response_type||"code"}=${res.message}${params?.state ? `&state=${params.state}` : ""}`
+	});
+
+	function authorize() {
+		fetch("https://oauth.gravitalia.com/oauth2", {
+			method: "POST",
+			headers: {
+				"Authorization": `; ${document.cookie}`?.split(`; session=`)[1]?.split(";")[0],
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				response_type: params?.response_type||"code",
+				bot_id: params.client_id,
+				redirect_uri: params.redirect_uri,
+				scope: "identity"
+			})
+		})
+		.then(res => res.json())
+		.then(res => {
+			if(res.message === "Invalid bot_id") {
+				return window.location.href = "/oauth2/error?message=Invalid%20bot";
+			} else if(res.message === "Invalid redirect_uri") {
+				return window.location.href = "/oauth2/error?message=Invalid%20redirect_uri";
+			} else if(res.message === "Internal server error") {
+				return window.location.href = "/oauth2/error";
+			} else {
+				return window.location.href = `${params.redirect_uri}?${params?.response_type||"code"}=${res.message}${params?.state ? `&state=${params.state}` : ""}`
+			}
+		});
+	}
+</script>
