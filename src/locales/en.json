@@ -93,5 +93,13 @@
     "Username": "Username",
     "Birthdate": "Birthdate",
     "(optional field)": "(optional field)",
-    "accept_tos_privacy": "You agree to our <a href=\"/terms\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">ToS</a> and our <a href=\"/privacy\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">privacy policy</a>"
+    "accept_tos_privacy": "You agree to our <a href=\"/terms\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">ToS</a> and our <a href=\"/privacy\" target=\"_blank\" rel=\"prefetch\" class=\"text-blue-500 hover:text-blue-700\">privacy policy</a>",
+
+    "wants access to your account": "wants access to your account",
+    "Access to username and avatar": "Access to username and avatar",
+    "Cancel": "Cancel",
+    "Authorize": "Authorize",
+    "Internal server error": "An internal server error has occurred",
+    "Invalid bot": "The specified bot is invalid",
+    "Invalid redirect_uri": "The page was blocked because of an invalid redirect"
 }
