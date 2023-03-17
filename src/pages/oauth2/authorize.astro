@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { t } from "../../../Translator";
+
+const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
+Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
+"en";
+const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
+
+if(!Astro.url.searchParams.get("client_id") || !Astro.url.searchParams.get("redirect_uri") || !Astro.url.searchParams.get("scope")) return Astro.redirect("/oauth2/error");
+
+let user;
+if(cookie) {
+    user = await fetch("https://oauth.gravitalia.com/users/@me", {
+		headers: {
+			"Authorization": cookie
+		}
+	})
+	.then(res => res.json())
+	.catch(_ => null)
+	.then(res => res);
+	
+	if(user?.message) return Astro.redirect("/signin");
+} else {
+	return Astro.redirect(`/signin?redirect=${window.location.href.replace(window.location.host, "").replace(/http[s]?:\/\//g, "")}`);
+}
+console.log(Astro.url.searchParams.get("client_id"))
+let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchParams.get("client_id")}`, {
+		headers: {
+			"Authorization": cookie
+		}
+	})
+	.then(res => res.json())
+	.catch(_ => null)
+	.then(res => res);
+
+if(bot?.error) return Astro.redirect("/oauth2/error");
+---
+
+<Layout title="Authorize - Gravitalia Account" absolute={null}>
+	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
+		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
+			<img class="rounded-lg" width="50" height="50" draggable="false" alt="" src={bot.avatar ? `https://cdn.gravitalia.com/${bot.avatar}` : `https://www.gravitalia.com/avatar/${bot.username[0].toUpperCase()}.webp`} />
+			<p class="text-lg font-semibold">{bot.username} {t("wants access to your account", locale)}</p>
+			<div class="flex items-center">
+				<div class="w-6 h-6 rounded-full bg-green-300 flex justify-center items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-700">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+					</svg>
+				</div>
+				<p class="ml-2">Access to username and avatar</p>
+			</div>
+			<br /><br />
+			<div class="flex justify-between w-full">
+				<a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+					{t("Cancel", locale)}
+				</a>
+				<button id="next" onclick="next()" class="text-sm px-4 py-2 outline-none rounded bg-[#332b43] dark:bg-indigo-500 dark:hover:bg-indigo-600 font-medium text-white disabled:opacity-75 transition-colors duration-200 disabled:cursor-not-allowed">
+					{t("Authorize", locale)}
+				</button>
+			</div>
+		</div>
+	</div>	
+</Layout>
