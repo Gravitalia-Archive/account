@@ -101,5 +101,15 @@
     "Authorize": "Authorize",
     "Internal server error": "An internal server error has occurred",
     "Invalid bot": "The specified bot is invalid",
-    "Invalid redirect_uri": "The page was blocked because of an invalid redirect"
+    "Invalid redirect_uri": "The page was blocked because of an invalid redirect",
+
+    "About": "About",
+    "Security": "Security",
+    "Data": "Data",
+    "OAuth": "OAuth",
+    "Update username": "Update username",
+    "Update your username will affect every services.": "Update your username will affect every services.",
+    "Your public profile": "Your public profile",
+    "Save": "Save",
+    "Confirm": "Confirm"
 }

@@ -101,5 +101,15 @@
     "Authorize": "Autoriser",
     "Internal server error": "Une erreur interne du serveur s'est produite",
     "Invalid bot": "Le bot spécifié n'est pas valide",
-    "Invalid redirect_uri": "La page a été bloquée en raison d'une redirection invalide"
+    "Invalid redirect_uri": "La page a été bloquée en raison d'une redirection invalide",
+
+    "About": "À propos",
+    "Security": "Sécurité",
+    "Data": "Données",
+    "OAuth": "OAuth",
+    "Update username": "Mettre à jour le nom",
+    "Update your username will affect every services.": "Changer votre nom va affecter tous les services.",
+    "Your public profile": "Vote profil public",
+    "Save": "Sauvegarder",
+    "Confirm": "Confirmer"
 }
