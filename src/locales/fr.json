@@ -115,5 +115,14 @@
     "Save": "Sauvegarder",
     "Confirm": "Confirmer",
 
-    "No authorized application": "Aucune application autorisée"
+    "No authorized application": "Aucune application autorisée",
+
+    "Forgotten password": "Mot de passe oublié",
+    "If the email address is valid, an email has been sent!": "Si l'adresse e-mail est valide, un e-mail a été envoyé !",
+    "Get the code": "Obtenir le code",
+
+    "Update password": "Mettre à jour le mot de passe",
+    "Passwords do not match": "Les mots de passe ne correspondent pas",
+    "Password confirmation": "Confirmation du mot de passe",
+    "Update": "Mettre à jour"
 }

@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { t } from "../../Translator";
+import Layout from "../../layouts/Layout.astro";
+import { t } from "../../../Translator";
 
 const locale = `; ${Astro.request.headers.get("cookie")}`?.split(`; locale=`)[1]?.split(";")[0] ||
 Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
@@ -38,7 +38,7 @@ if(cookie) {
 			<label for="password" id="invalid_password_label" class="hidden text-sm text-red-500 w-full">{t("Invalid password", locale)}</label>
 			<div id="psw" class="hidden flex flex-col space-y-1">
 				<input id="password" type="password" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Password", locale)} />
-				<a href="/sign-in/password" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">{t("Forgot your password?", locale)}</a>
+				<a href="/signin/password" rel="prefetch" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">{t("Forgot your password?", locale)}</a>
 			</div>
 			<div id="enter_mfa" class="hidden flex">
 				<input autofocus id="1" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
@@ -49,7 +49,7 @@ if(cookie) {
 				<input id="6" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 			</div>
 			<div class="flex justify-between w-full">
-				<a href="/signup" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+				<a href="/signup" rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
 					{t("Create account", locale)}
 				</a>
 				<button id="back_btn" onclick="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
