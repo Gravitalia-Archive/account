@@ -115,5 +115,14 @@
     "Save": "Save",
     "Confirm": "Confirm",
 
-    "No authorized application": "No authorized application"
+    "No authorized application": "No authorized application",
+
+    "Forgotten password": "Forgotten password",
+    "If the email address is valid, an email has been sent!": "If the email address is valid, an email has been sent!",
+    "Get the code": "Get the code",
+
+    "Update password": "Update password",
+    "Passwords do not match": "Passwords do not match",
+    "Password confirmation": "Password confirmation",
+    "Update": "Update"
 }
