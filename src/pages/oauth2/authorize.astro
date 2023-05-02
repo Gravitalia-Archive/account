@@ -8,21 +8,10 @@ Astro.request.headers.get("accept-language")?.split(",")[0]?.split("-")[0] ||
 const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1]?.split(";")[0];
 
 if(!Astro.url.searchParams.get("client_id") || !Astro.url.searchParams.get("redirect_uri") || !Astro.url.searchParams.get("scope")) return Astro.redirect("/oauth2/error");
-let user;
-if(cookie) {
-    user = await fetch("https://oauth.gravitalia.com/users/@me", {
-		headers: {
-			"Authorization": cookie
-		}
-	})
-	.then(res => res.json())
-	.catch(_ => null)
-	.then(res => res);
-	
-	if(user?.message) return Astro.redirect("/signin");
-} else {
-	return Astro.redirect(`/signin?redirect=${window.location.href.replace(window.location.host, "").replace(/http[s]?:\/\//g, "")}`);
+if(!cookie) {
+	return Astro.redirect(`/signin?redirect=${Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, "")}`);
 }
+
 let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchParams.get("client_id")}`, {
 		headers: {
 			"Authorization": cookie
@@ -33,6 +22,38 @@ let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchPara
 	.then(res => res);
 
 if(bot?.error) return Astro.redirect("/oauth2/error?message=Invalid%20bot");
+
+let user;
+if(cookie) {
+	user = await fetch("https://oauth.gravitalia.com/users/@me", {
+		headers: {
+			"Authorization": cookie
+		}
+	})
+	.then(res => res.json())
+	.catch(_ => null)
+	.then(res => res);
+	
+	if(user?.message) return Astro.redirect("/signin");
+
+	fetch("https://oauth.gravitalia.com/oauth2", {
+		method: "POST",
+		headers: {
+			"Authorization": cookie,
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			response_type: Astro.url.searchParams.get("response_type")||"code",
+			bot_id: Astro.url.searchParams.get("client_id"),
+			redirect_uri: Astro.url.searchParams.get("redirect_uri"),
+			scope: "identity"
+		})
+	})
+	.then(res => res.json())
+	.then(res => {
+		if(!res.message.includes("Invalid") && res.message !== "") return Astro.redirect(`${Astro.url.searchParams.get("redirect_uri")}?${Astro.url.searchParams.get("response_type")||"code"}=${res.message}${Astro.url.searchParams.get("state") ? `&state=${Astro.url.searchParams.get("state")}` : ""}`)
+	});
+}
 ---
 
 <Layout title="Authorize - Gravitalia Account" absolute={null}>
@@ -64,24 +85,6 @@ if(bot?.error) return Astro.redirect("/oauth2/error?message=Invalid%20bot");
 <script lang="js">
 	const params = new Proxy(new URLSearchParams(window.location.search), {
 		get: (searchParams, prop) => searchParams.get(prop),
-	});
-
-	fetch("https://oauth.gravitalia.com/oauth2", {
-		method: "POST",
-		headers: {
-			"Authorization": `; ${document.cookie}`?.split(`; session=`)[1]?.split(";")[0],
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({
-			response_type: params?.response_type||"code",
-			bot_id: params.client_id,
-			redirect_uri: params.redirect_uri,
-			scope: "identity"
-		})
-	})
-	.then(res => res.json())
-	.then(res => {
-		if(!res.message.includes("Invalid") && res.message !== "") return window.location.href = `${params.redirect_uri}?${params?.response_type||"code"}=${res.message}${params?.state ? `&state=${params.state}` : ""}`
 	});
 
 	function authorize() {
