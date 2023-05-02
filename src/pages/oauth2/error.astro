@@ -18,9 +18,9 @@ if(cookie) {
 	.catch(_ => null)
 	.then(res => res);
 	
-	if(user?.message) return Astro.redirect("/signin");
+	if(user?.message) return Astro.redirect("/signin", 307);
 } else {
-	return Astro.redirect(`/signin?redirect=${window.location.href.replace(window.location.host, "").replace(/http[s]?:\/\//g, "")}`);
+	return Astro.redirect(`/signin?redirect=${Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, "")}`, 307);
 }
 ---
 
