@@ -49,7 +49,7 @@ if(cookie) {
 				<input id="6" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 			</div>
 			<div class="flex justify-between w-full">
-				<a href="/signup" rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+				<a href={`/signup${Astro.url.searchParams.get("redirect") ? `?redirect=${Astro.url.searchParams.get("redirect")}` : ""}`} rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
 					{t("Create account", locale)}
 				</a>
 				<button id="back_btn" onclick="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
@@ -144,7 +144,19 @@ if(cookie) {
 				} else {
 					document.cookie = `session=${res.message}; max-age=5256000; SameSite=strict; secure;`;
 					setTimeout(() => {
-						window.location.href = "/";
+						const params = new Proxy(new URLSearchParams(window.location.search), {
+							get: (searchParams, prop) => searchParams.get(prop),
+						});
+
+						if(params?.redirect) {
+							if (!params.redirect.includes("http")) {
+								window.location.href = params.redirect;
+							} else {
+								window.location.href = "/";
+							}
+						} else {
+							window.location.href = "/";
+						}
 					}, 500)
 				}
 			});
@@ -182,7 +194,7 @@ if(cookie) {
 	}
 	
 	function cf_callback(token) {
-		cf_token = token;
+		cf_callback = token;
 	}
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
