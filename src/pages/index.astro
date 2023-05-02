@@ -17,9 +17,9 @@ if(cookie) {
 	.catch(_ => null)
 	.then(res => res);
 	
-	if(user?.message) return Astro.redirect("/signin");
+	if(user?.message) return Astro.redirect("/signin", 307);
 } else {
-	return Astro.redirect("/signin");
+	return Astro.redirect("/signin", 307);
 }
 ---
 
@@ -31,9 +31,15 @@ if(cookie) {
 				<h1 class="pl-2 text-xl font-bold">Gravitalia</h1>
 			</div>
 	
-			<div class="pr-10 pt-2">
+			<div class="pr-10 pt-2 relative">
 				<button class="h-8 w-8 overflow-hidden rounded-full">
 					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].toUpperCase()}.webp`} alt="" />
+
+					<div class="ml-96">
+						<div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg focus:outline-none">
+							<span class="block px-4 py-2 text-sm text-gray-700">Sign out</span>
+						</div>
+					</div>
 				</button>
 			</div>
 		</header>
