@@ -24,6 +24,7 @@ let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchPara
 if(bot?.error) return Astro.redirect("/oauth2/error?message=Invalid%20bot");
 
 let user;
+let code;
 if(cookie) {
 	user = await fetch("https://oauth.gravitalia.com/users/@me", {
 		headers: {
@@ -33,10 +34,8 @@ if(cookie) {
 	.then(res => res.json())
 	.catch(_ => null)
 	.then(res => res);
-	
-	if(user?.message) return Astro.redirect("/signin");
 
-	fetch("https://oauth.gravitalia.com/oauth2", {
+	code = await fetch("https://oauth.gravitalia.com/oauth2", {
 		method: "POST",
 		headers: {
 			"Authorization": cookie,
@@ -50,10 +49,11 @@ if(cookie) {
 		})
 	})
 	.then(res => res.json())
-	.then(res => {
-		if(!res.message.includes("Invalid") && res.message !== "") return Astro.redirect(`${Astro.url.searchParams.get("redirect_uri")}?${Astro.url.searchParams.get("response_type")||"code"}=${res.message}${Astro.url.searchParams.get("state") ? `&state=${Astro.url.searchParams.get("state")}` : ""}`)
-	});
+	.then(res => res.message);
 }
+
+if(user && user?.message) return Astro.redirect(`/signin?redirect=${Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, "")}`);
+if(code && !code.includes("Invalid") && code !== "") return Astro.redirect(`${Astro.url.searchParams.get("redirect_uri")}?${Astro.url.searchParams.get("response_type")||"code"}=${code}${Astro.url.searchParams.get("state") ? `&state=${Astro.url.searchParams.get("state")}` : ""}`);
 ---
 
 <Layout title="Authorize - Gravitalia Account" absolute={null}>
