@@ -9,7 +9,7 @@ const cookie = `; ${Astro.request.headers.get("cookie")}`?.split(`; session=`)[1
 
 if(!Astro.url.searchParams.get("client_id") || !Astro.url.searchParams.get("redirect_uri") || !Astro.url.searchParams.get("scope")) return Astro.redirect("/oauth2/error", 307);
 if(!cookie) {
-	return Astro.redirect(`/signin?redirect=${Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, "")}`, 307);
+	return Astro.redirect(`/signin?redirect=${encodeURIComponent(Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, ""))}`, 307);
 }
 
 let bot = await fetch(`https://oauth.gravitalia.com/users/${Astro.url.searchParams.get("client_id")}`, {
@@ -52,7 +52,7 @@ if(cookie) {
 	.then(res => res.message);
 }
 
-if(user && user?.message) return Astro.redirect(`/signin?redirect=${Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, "")}`, 307);
+if(user && user?.message) return Astro.redirect(`/signin?redirect=${encodeURIComponent(Astro.url.href.replace(Astro.url.host, "").replace(/http[s]?:\/\//g, ""))}`, 307);
 if(code && !code.includes("Invalid") && code !== "") return Astro.redirect(`${Astro.url.searchParams.get("redirect_uri")}?${Astro.url.searchParams.get("response_type")||"code"}=${code}${Astro.url.searchParams.get("state") ? `&state=${Astro.url.searchParams.get("state")}` : ""}`, 307);
 ---
 
