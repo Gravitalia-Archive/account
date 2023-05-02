@@ -58,7 +58,7 @@ if(cookie) {
 				<p id="tos-tips" class="mt-3 text-xs w-full dark:text-gray-300 w-4/5" set:html={t("accept_tos_privacy", locale)}></p>
 			</div>
 			<div class="flex justify-between w-full">
-				<a href="/signin" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+				<a href={`/signin${Astro.url.searchParams.get("redirect") ? `?redirect=${Astro.url.searchParams.get("redirect")}` : ""}`} id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
 					{t("Sign in", locale)}
 				</a>
 				<button id="back_btn" onclick="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
@@ -169,7 +169,19 @@ if(cookie) {
 				} else {
 					document.cookie = `session=${res.message}; max-age=5256000; SameSite=strict; secure;`;
 					setTimeout(() => {
-						window.location.href = "/";
+						const params = new Proxy(new URLSearchParams(window.location.search), {
+							get: (searchParams, prop) => searchParams.get(prop),
+						});
+
+						if(params?.redirect) {
+							if (!params.redirect.includes("http")) {
+								window.location.href = params.redirect;
+							} else {
+								window.location.href = "/";
+							}
+						} else {
+							window.location.href = "/";
+						}
 					}, 500)
 				}
 			});
