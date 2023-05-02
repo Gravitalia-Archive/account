@@ -174,8 +174,9 @@ if(cookie) {
 						});
 
 						if(params?.redirect) {
-							if (!params.redirect.includes("http")) {
-								window.location.href = params.redirect;
+							let url = decodeURIComponent(params.redirect)
+							if (!url.includes("http")) {
+								window.location.href = url;
 							} else {
 								window.location.href = "/";
 							}
