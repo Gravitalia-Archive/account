@@ -44,7 +44,7 @@ if(cookie) {
 		body: JSON.stringify({
 			response_type: Astro.url.searchParams.get("response_type")||"code",
 			bot_id: Astro.url.searchParams.get("client_id"),
-			redirect_uri: Astro.url.searchParams.get("redirect_uri"),
+			redirect_uri: Astro.url.searchParams.get("redirect_uri")?.includes("http") ? Astro.url.searchParams.get("redirect_uri") : `https://${Astro.url.searchParams.get("redirect_uri")}`,
 			scope: "identity"
 		})
 	})
