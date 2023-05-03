@@ -49,7 +49,7 @@ if(cookie) {
 				<input id="6" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 			</div>
 			<div class="flex justify-between w-full">
-				<a href={`/signup${Astro.url.searchParams.get("redirect") ? `?redirect=${Astro.url.searchParams.get("redirect")}` : ""}`} rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
+				<a href={`/signup${Astro.url.searchParams.get("redirect") ? `?redirect=${encodeURIComponent(Astro.url.searchParams.get("redirect")||"")}` : ""}`} rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
 					{t("Create account", locale)}
 				</a>
 				<button id="back_btn" onclick="back()" class="hidden text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
@@ -126,7 +126,7 @@ if(cookie) {
 				},
 				body: JSON.stringify({
 					email: document.getElementById("email")["value"],
-					password: document.getElementById("password").value === "" ? "testemail" : document.getElementById("password").value,
+					password: document.getElementById("password").value === "" ? "Password1234(DontUsePls)" : document.getElementById("password").value,
 					mfa
 				})
 			})
