@@ -97,7 +97,7 @@ if(code && !code.includes("Invalid") && code !== "") return Astro.redirect(`${As
 			body: JSON.stringify({
 				response_type: params?.response_type||"code",
 				bot_id: params.client_id,
-				redirect_uri: params.redirect_uri,
+				redirect_uri: params.redirect_uri.includes("http") ? params.redirect_uri : `https://${params.redirect_uri}`,
 				scope: "identity"
 			})
 		})
@@ -110,7 +110,7 @@ if(code && !code.includes("Invalid") && code !== "") return Astro.redirect(`${As
 			} else if(res.message === "Internal server error") {
 				return window.location.href = "/oauth2/error";
 			} else {
-				return window.location.href = `${params.redirect_uri}?${params?.response_type||"code"}=${res.message}${params?.state ? `&state=${params.state}` : ""}`
+				return window.location.href = `${params.redirect_uri.includes("http") ? params.redirect_uri : `https://${params.redirect_uri}`}?${params?.response_type||"code"}=${res.message}${params?.state ? `&state=${params.state}` : ""}`
 			}
 		});
 	}
