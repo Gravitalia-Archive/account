@@ -111,6 +111,7 @@
     "OAuth": "OAuth",
     "Update username": "Update username",
     "Update your username will affect every services.": "Update your username will affect every services.",
+    "Invalid username, try with 16 characters": "Invalid username, try with 16 characters",
     "Your public profile": "Your public profile",
     "Save": "Save",
     "Confirm": "Confirm",
