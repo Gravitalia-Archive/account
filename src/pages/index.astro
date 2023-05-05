@@ -139,10 +139,12 @@ if(cookie) {
 		document.getElementById("name_modal").classList.remove("hidden");
 	}
 	function confirm_change_username() {
-		if(document.getElementById("new_username").innerText.length >= 16) {
-			document.getElementById("new_username").classList.add("border-red-500");
+		if(document.getElementById("new_username").value.length >= 16) {
+			document.getElementById("new_username").classList.remove("dark:border-zinc-800");
+			document.getElementById("new_username").classList.add("border-red-500", "dark:border-red-600");
 			document.getElementById("invalid_username_label").classList.remove("hidden");
 		} else {
+			document.getElementById("new_username").classList.add("dark:border-zinc-800");
 			document.getElementById("new_username").classList.remove("border-red-500");
 			document.getElementById("invalid_username_label").classList.add("hidden");
 			document.getElementById("username").innerText = document.getElementById("new_username").value;
@@ -172,7 +174,8 @@ if(cookie) {
 				window.location.reload();
 			} else if(res.message === "Invalid username") {
 				open_modal();
-				document.getElementById("new_username").classList.add("border-red-500");
+				document.getElementById("new_username").classList.remove("dark:border-zinc-800");
+				document.getElementById("new_username").classList.add("border-red-500", "dark:border-red-600");
 				document.getElementById("invalid_username_label").classList.remove("hidden");
 			}
 		});
