@@ -33,7 +33,7 @@ if(cookie) {
 	
 			<div class="pr-10 pt-2">
 				<button class="h-8 w-8 overflow-hidden rounded-full">
-					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].toUpperCase()}.webp`} alt="" />
+					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} alt="" />
 				</button>
 			</div>
 		</header>
