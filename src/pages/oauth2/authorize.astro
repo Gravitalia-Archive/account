@@ -59,7 +59,7 @@ if(code && !code.includes("Invalid") && code !== "") return Astro.redirect(`${As
 <Layout title="Authorize - Gravitalia Account" absolute={null}>
 	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
 		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
-			<img class="rounded-lg" width="50" height="50" draggable="false" alt="" src={bot.avatar ? `https://cdn.gravitalia.com/${bot.avatar}` : `https://www.gravitalia.com/avatar/${bot.username[0].toUpperCase()}.webp`} />
+			<img class="rounded-lg" width="50" height="50" draggable="false" alt="" src={bot.avatar ? `https://cdn.gravitalia.com/${bot.avatar}` : `https://www.gravitalia.com/avatar/${bot.username[0].match(/[A-z]/) ? bot.username[0].toUpperCase() : "A"}.webp`} />
 			<p class="text-lg font-semibold">{bot.username} {t("wants access to your account", locale)}</p>
 			<div class="flex items-center">
 				<div class="w-6 h-6 rounded-full bg-green-300 flex justify-center items-center">
