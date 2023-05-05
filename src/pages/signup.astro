@@ -35,8 +35,8 @@ if(cookie) {
 			<p class="text-lg font-semibold">{t("Let us connect you!", locale)}</p>
 			<div id="first" class="space-y-2">
 				<div class="flex space-x-2">
-					<input id="firstname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Firstname", locale)} />
-					<input id="lastname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Name", locale)} />
+					<input id="firstname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Firstname", locale)} maxlength="10" />
+					<input id="lastname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Name", locale)} maxlength="15" />
 				</div>
 				<input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Email adress", locale)} />
 				<br />
