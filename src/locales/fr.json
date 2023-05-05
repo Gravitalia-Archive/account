@@ -111,6 +111,7 @@
     "OAuth": "OAuth",
     "Update username": "Mettre à jour le nom",
     "Update your username will affect every services.": "Changer votre nom va affecter tous les services.",
+    "Invalid username, try with 16 characters": "Nom d'utilisateur invalide, essayez avec 16 caractères",
     "Your public profile": "Votre profil public",
     "Save": "Sauvegarder",
     "Confirm": "Confirmer",
