@@ -33,7 +33,7 @@ if(cookie) {
 	
 			<div class="pr-10 pt-2 relative">
 				<button class="h-8 w-8 overflow-hidden rounded-full">
-					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].toUpperCase()}.webp`} alt="" />
+					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} alt="" />
 
 					<div class="ml-96">
 						<div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg focus:outline-none">
@@ -87,7 +87,7 @@ if(cookie) {
 				<p class="text-2xl font-semibold pb-4">{t("Your public profile", locale)}</p>
 				<div class="pt-4 pl-4 pr-4 border dark:border-none dark:bg-zinc-800 shadow-xs w-1/2 h-96 rounded-md">
 					<div align="center" class="space-y-4">
-						<img id="avatar" class="rounded-full" src= {user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].toUpperCase()}.webp`} width="120" alt="" />
+						<img id="avatar" class="rounded-full" src= {user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} width="120" alt="" />
 						<div class="flex items-center justify-center">
 							<p onclick="open_modal()" id="username" class="pl-6 cursor-pointer rounded-sm max-w-4 text-xl font-semibold">{user.username}</p>
 							<div class="pl-2" onclick="open_modal()">
@@ -117,7 +117,8 @@ if(cookie) {
 						</div>
 						<p class="pb-3 text-sm text-gray-500 dark:text-gray-400">{t("Update your username will affect every services.", locale)}</p>
 						<div class="my-5">
-							<input id="new_username" class="focus:outline-none text-lg border dark:border-zinc-800 dark:bg-zinc-800 w-full py-2 px-2 rounded-md" placeholder={user.username} value={user.username} />
+							<label for="new_username" id="invalid_username_label" class="hidden text-sm text-red-500 w-full">{t("Invalid username", locale)}</label>
+							<input id="new_username" class="focus:outline-none text-lg border dark:border-zinc-800 dark:bg-zinc-800 w-full py-2 px-2 rounded-md" placeholder={user.username} value={user.username} maxlength="16" minlength="1" />
 						</div>
 						<div class="flex justify-end pt-2">
 							<button onclick="close_modal()" class="focus:outline-none px-4 bg-none hover:underline duration-300 p-3 rounded-lg text-black hover:bg-gray-300 dark:text-white hover:dark:text-gray-200 hover:dark:bg-gray-800">{t("Cancel", locale)}</button>
@@ -138,14 +139,23 @@ if(cookie) {
 		document.getElementById("name_modal").classList.remove("hidden");
 	}
 	function confirm_change_username() {
-		document.getElementById("username").innerHTML = document.getElementById("new_username").value;
-		const avatar = document.getElementById("avatar").src;
-		if(avatar.match(/https:\/\/www[.]gravitalia[.]com\/avatar\/[A-Z]{1}[.]webp/g).length !== 0) {
-			document.getElementById("avatar").src = `https://www.gravitalia.com/avatar/${document.getElementById("username").innerHTML[0].toUpperCase()}.webp`
-		}
+		if(document.getElementById("new_username").innerText.length >= 16) {
+			document.getElementById("new_username").classList.add("border-red-500");
+			document.getElementById("invalid_username_label").classList.remove("hidden");
+		} else {
+			document.getElementById("new_username").classList.remove("border-red-500");
+			document.getElementById("invalid_username_label").classList.add("hidden");
+			document.getElementById("username").innerText = document.getElementById("new_username").value;
 
-		document.getElementById("name_modal").classList.add("hidden");
+			const avatar = document.getElementById("avatar").src;
+			if(avatar.match(/https:\/\/www[.]gravitalia[.]com\/avatar\/[A-Z]{1}[.]webp/g).length !== 0) {
+				document.getElementById("avatar").src = `https://www.gravitalia.com/avatar/${document.getElementById("username").innerHTML[0].match(/[A-z]/) ? document.getElementById("username").innerHTML[0].toUpperCase() : "A"}.webp`
+			}
+
+			document.getElementById("name_modal").classList.add("hidden");
+		}
 	}
+
 	function save() {
 		fetch("https://oauth.gravitalia.com/users/@me", {
 			method: "PATCH",
@@ -154,12 +164,16 @@ if(cookie) {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				username: document.getElementById("username").innerHTML
+				username: document.getElementById("username").innerText
 			})
 		}).then(res => res.json())
 		.then(res => {
 			if(!res.error) {
 				window.location.reload();
+			} else if(res.message === "Invalid username") {
+				open_modal();
+				document.getElementById("new_username").classList.add("border-red-500");
+				document.getElementById("invalid_username_label").classList.remove("hidden");
 			}
 		});
 	}
