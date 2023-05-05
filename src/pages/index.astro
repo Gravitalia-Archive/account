@@ -118,7 +118,7 @@ if(cookie) {
 						<p class="pb-3 text-sm text-gray-500 dark:text-gray-400">{t("Update your username will affect every services.", locale)}</p>
 						<div class="my-5">
 							<label for="new_username" id="invalid_username_label" class="hidden text-sm text-red-500 w-full">{t("Invalid username", locale)}</label>
-							<input id="new_username" class="focus:outline-none text-lg border dark:border-zinc-800 dark:bg-zinc-800 w-full py-2 px-2 rounded-md" placeholder={user.username} value={user.username} maxlength="15" minlength="1" />
+							<input id="new_username" class="focus:outline-none text-lg border dark:border-zinc-800 dark:bg-zinc-800 w-full py-2 px-2 rounded-md" placeholder={user.username} value={user.username} maxlength="25" minlength="1" />
 						</div>
 						<div class="flex justify-end pt-2">
 							<button onclick="close_modal()" class="focus:outline-none px-4 bg-none hover:underline duration-300 p-3 rounded-lg text-black hover:bg-gray-300 dark:text-white hover:dark:text-gray-200 hover:dark:bg-gray-800">{t("Cancel", locale)}</button>
@@ -139,10 +139,12 @@ if(cookie) {
 		document.getElementById("name_modal").classList.remove("hidden");
 	}
 	function confirm_change_username() {
-		if(document.getElementById("new_username").innerText.length >= 16) {
-			document.getElementById("new_username").classList.add("border-red-500");
+		if(document.getElementById("new_username").value.length > 25) {
+			document.getElementById("new_username").classList.remove("dark:border-zinc-800");
+			document.getElementById("new_username").classList.add("border-red-500", "dark:border-red-600");
 			document.getElementById("invalid_username_label").classList.remove("hidden");
 		} else {
+			document.getElementById("new_username").classList.add("dark:border-zinc-800");
 			document.getElementById("new_username").classList.remove("border-red-500");
 			document.getElementById("invalid_username_label").classList.add("hidden");
 			document.getElementById("username").innerText = document.getElementById("new_username").value;
@@ -172,7 +174,8 @@ if(cookie) {
 				window.location.reload();
 			} else if(res.message === "Invalid username") {
 				open_modal();
-				document.getElementById("new_username").classList.add("border-red-500");
+				document.getElementById("new_username").classList.remove("dark:border-zinc-800");
+				document.getElementById("new_username").classList.add("border-red-500", "dark:border-red-600");
 				document.getElementById("invalid_username_label").classList.remove("hidden");
 			}
 		});

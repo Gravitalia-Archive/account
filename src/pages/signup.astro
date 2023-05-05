@@ -24,6 +24,9 @@ if(cookie) {
 	<p id="ratelimit" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
         <span class="underline pr-1">{t("Slow down!", locale)} </span> {t("You can only create an account every 5 minutes", locale)}.
     </p>
+	<p id="already_used_email" class="hidden flex h-10 items-center justify-center bg-[#332b43] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+    	<span class="underline pr-1">{t("Warning!", locale)} </span> {t("The email address entered is already in use.", locale)}
+    </p>
 
 	<div id="CF-Token-Generator" class="cf-turnstile" data-sitekey="0x4AAAAAAABG7Pcx4-fniaty" data-theme="auto" data-language={locale} data-callback="cf_callback"></div>
 	<div class="mt-28 h-[60vh] xl:h-[50vh] xl:mt-40 flex justify-center items-center">
@@ -32,8 +35,8 @@ if(cookie) {
 			<p class="text-lg font-semibold">{t("Let us connect you!", locale)}</p>
 			<div id="first" class="space-y-2">
 				<div class="flex space-x-2">
-					<input id="firstname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Firstname", locale)} />
-					<input id="lastname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Name", locale)} />
+					<input id="firstname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Firstname", locale)} maxlength="10" />
+					<input id="lastname" type="text" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-[9.75rem]" placeholder={t("Name", locale)} maxlength="15" />
 				</div>
 				<input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Email adress", locale)} />
 				<br />
@@ -76,62 +79,91 @@ if(cookie) {
 	let cf_token = "";
 
 	async function next() {
-		if(!document.getElementById("first")?.classList.value.includes("hidden")) {
+		if(!document.getElementById("first").classList.value.includes("hidden")) {
 			if(!document.getElementById("firstname").value || document.getElementById("firstname").value.length >= 16) {
-				document.getElementById("password")?.classList.remove("border-red-500");
-				document.getElementById("email")?.classList.remove("border-red-500");
-				document.getElementById("firstname")?.classList.add("border-red-500");
+				document.getElementById("password").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("password").classList.remove("border-red-500");
+				document.getElementById("email").classList.remove("border-red-500");
+				document.getElementById("email").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("firstname").classList.add("border-red-500");
+				document.getElementById("firstname").classList.remove("border-slate-500", "dark:border-zinc-800");
 			} else if((!document.getElementById("email").value.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,7})$/))) {
-				document.getElementById("password")?.classList.remove("border-red-500");
-				document.getElementById("firstname")?.classList.remove("border-red-500");
-				document.getElementById("email")?.classList.add("border-red-500");
+				document.getElementById("password").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("password").classList.remove("border-red-500");
+				document.getElementById("firstname").classList.remove("border-red-500");
+				document.getElementById("firstname").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("email").classList.add("border-red-500");
+				document.getElementById("email").classList.remove("border-slate-500", "dark:border-zinc-800");
 			} else if(!document.getElementById("password").value.match(/([0-9|*|]|[$&+,:;=?@#|'<>.^*()%!-_])+/) || !document.getElementById("password").value.match(/[A-z]/) || document.getElementById("password").value.length < 8) {
-				document.getElementById("email")?.classList.remove("border-red-500");
-				document.getElementById("firstname")?.classList.remove("border-red-500");
-				document.getElementById("password")?.classList.add("border-red-500");
+				document.getElementById("email").classList.remove("border-red-500");
+				document.getElementById("email").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("firstname").classList.remove("border-red-500");
+				document.getElementById("firstname").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("password").classList.add("border-red-500");
+				document.getElementById("password").classList.remove("border-slate-500", "dark:border-zinc-800");
 			} else {
-				document.getElementById("first")?.classList.add("hidden");
-				document.getElementById("second")?.classList.remove("hidden");
-				document.getElementById("create_acc")?.classList.add("hidden");
-				document.getElementById("back_btn")?.classList.remove("hidden");
+				document.getElementById("first").classList.add("hidden");
+				document.getElementById("second").classList.remove("hidden");
+				document.getElementById("create_acc").classList.add("hidden");
+				document.getElementById("back_btn").classList.remove("hidden");
 			}
 		} else {
 			if(!document.getElementById("vanity").value || !document.getElementById("vanity").value.match(/[A-z|0-9|_]{3,16}/)) {
-				document.getElementById("password")?.classList.remove("border-red-500");
-				document.getElementById("email")?.classList.remove("border-red-500");
-				document.getElementById("firstname")?.classList.remove("border-red-500");
-				document.getElementById("vanity_div")?.classList.add("border-red-500");
+				document.getElementById("password").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("password").classList.remove("border-red-500");
+				document.getElementById("email").classList.remove("border-red-500");
+				document.getElementById("email").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("firstname").classList.remove("border-red-500");
+				document.getElementById("firstname").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("vanity_div").classList.add("border-red-500");
+				document.getElementById("vanity_div").classList.remove("border-slate-500", "dark:border-zinc-800");
 			} else if(document.getElementById("birth").value && new Date().getFullYear()-parseInt(document.getElementById("birth").value.split("-")[0], 10) < 13) {
-				document.getElementById("vanity_div")?.classList.remove("border-red-500");
-				document.getElementById("birth")?.classList.add("border-red-500");
+				document.getElementById("vanity_div").classList.remove("border-red-500");
+				document.getElementById("birth").classList.add("border-red-500");
+				document.getElementById("birth").classList.remove("border-slate-500", "dark:border-zinc-800");
 			} else {
-				document.getElementById("password")?.classList.remove("border-red-500");
-				document.getElementById("email")?.classList.remove("border-red-500");
-				document.getElementById("firstname")?.classList.remove("border-red-500");
-				document.getElementById("vanity_div")?.classList.remove("border-red-500");
-				document.getElementById("birth")?.classList.remove("border-red-500");
+				document.getElementById("password").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("password").classList.remove("border-red-500");
+				document.getElementById("email").classList.remove("border-red-500");
+				document.getElementById("email").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("firstname").classList.remove("border-red-500");
+				document.getElementById("firstname").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("vanity_div").classList.remove("border-red-500");
+				document.getElementById("vanity_div").classList.add("border-slate-500", "dark:border-zinc-800");
+				document.getElementById("birth").classList.remove("border-red-500");
+				document.getElementById("vanity_div").classList.add("border-slate-500", "dark:border-zinc-800");
 
 				const res = await create();
-				if(res === "email") {
+				if(res.includes("email")) {
 					back();
-					document.getElementById("email")?.classList.add("border-red-500");
+					document.getElementById("email").classList.add("border-red-500");
+					document.getElementById("email").classList.remove("border-slate-500", "dark:border-zinc-800");
+					if(res.includes("already")) {
+						document.getElementById("ratelimit").classList.add("hidden");
+						document.getElementById("already_used_email").classList.remove("hidden");
+						setTimeout(() => {
+							document.getElementById("already_used_email").classList.add("hidden");
+						}, 1000*60);
+					}
 				} else if(res === "vanity") {
-					document.getElementById("vanity_div")?.classList.add("border-red-500");
+					document.getElementById("vanity_div").classList.add("border-red-500");
+					document.getElementById("vanity_div").classList.remove("border-slate-500", "dark:border-zinc-800");
+					document.getElementById("already_used_email").classList.add("hidden");
 				} else if(res === "ratelimit") {
 					document.getElementById("ratelimit").classList.remove("hidden");
 					setTimeout(() => {
 						document.getElementById("ratelimit").classList.add("hidden");
-					}, 5000*60)
+					}, 5000*60);
 				}
 			}
 		}
 	}
 
 	function back() {
-		document.getElementById("first")?.classList.remove("hidden");
-		document.getElementById("second")?.classList.add("hidden");
-		document.getElementById("create_acc")?.classList.remove("hidden");
-		document.getElementById("back_btn")?.classList.add("hidden");
+		document.getElementById("first").classList.remove("hidden");
+		document.getElementById("second").classList.add("hidden");
+		document.getElementById("create_acc").classList.remove("hidden");
+		document.getElementById("back_btn").classList.add("hidden");
 	}
 
 	function create() {
@@ -162,6 +194,8 @@ if(cookie) {
 			.then(res => {
 				if(res?.message === "Invalid email") {
 					resolve("email");
+				} else if(res?.message === "Email already used") {
+					resolve("email_already");
 				} else if(res?.message === "Invalid vanity") {
 					resolve("vanity");
 				} else if(res?.error) {

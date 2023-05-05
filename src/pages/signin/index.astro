@@ -70,9 +70,11 @@ if(cookie) {
 		document.getElementById("next").disabled = true;
 		if(!document.getElementById("create_acc").classList.value.includes("hidden")) {
 			if(await login() === "email") {
+				document.getElementById("email").classList.remove("border-slate-500", "dark:border-zinc-800");
 				document.getElementById("email").classList.add("border-red-500");
 				document.getElementById("invalid_email_label").classList.remove("hidden");
 			} else {
+				document.getElementById("email").classList.add("border-slate-500", "dark:border-zinc-800");
 				document.getElementById("create_acc").classList.add("hidden");
 				document.getElementById("invalid_email_label").classList.add("hidden");
 				document.getElementById("email").classList.add("hidden");
@@ -83,6 +85,7 @@ if(cookie) {
 		} else {
 			const call_res = await login();
 			if(call_res === "password") {
+				document.getElementById("password").classList.remove("border-slate-500", "dark:border-zinc-800");
 				document.getElementById("password").classList.add("border-red-500");
 				document.getElementById("invalid_password_label").classList.remove("hidden");
 			} else if(call_res === "mfa") {
@@ -107,6 +110,8 @@ if(cookie) {
 		document.getElementById("back_btn").classList.add("hidden");
 		document.getElementById("psw").classList.add("hidden");
 		document.getElementById("invalid_password_label").classList.add("hidden");
+		document.getElementById("password").classList.add("border-slate-500", "dark:border-zinc-800");
+		document.getElementById("password").classList.remove("border-red-500");
 	}
 
 	function login(mfa = null) {
