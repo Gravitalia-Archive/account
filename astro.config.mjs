@@ -1,14 +1,13 @@
 import { defineConfig } from 'astro/config';
-import vue from "@astrojs/vue";
-import tailwind from "@astrojs/tailwind";
-import prefetch from "@astrojs/prefetch";
-import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
+import prefetch from "@astrojs/prefetch";
+import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://account.gravitalia.com/",
   output: "server",
-  integrations: [vue(), tailwind(), prefetch(), sitemap()],
   adapter: cloudflare(),
-  site: "https://account.gravitalia.com/"
+  integrations: [prefetch(), tailwind(), sitemap()]
 });
