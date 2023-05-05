@@ -4,6 +4,8 @@
     "Slow down!": "Slow down!",
     "You tried a password too many times... you were blocked for 5 minutes": "You tried a password too many times... you were blocked for 5 minutes",
     "You can only create an account every 5 minutes": "You can only create an account every 5 minutes",
+    "The email address entered is already in use.": "The email address entered is already in use.",
+    "Warning!": "Warning!",
     
     "tos": "Terms of Use",
     "tos_date": "Effective Date:",

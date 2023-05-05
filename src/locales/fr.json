@@ -4,6 +4,8 @@
     "Slow down!": "Ralentissez !",
     "You tried a password too many times... you were blocked for 5 minutes": "Vous avez essayé un mot de passe trop souvent... vous avez été bloqué pendant 5 minutes",
     "You can only create an account every 5 minutes": "Vous ne pouvez créer un compte que toutes les 5 minutes",
+    "The email address entered is already in use.": "L'adresse e-mail saisie est déjà utilisée.",
+    "Warning!": "Attention !",
 
     "tos": "Conditions Générales d'Utilisation",
     "tos_date": "Date d’effet :",
