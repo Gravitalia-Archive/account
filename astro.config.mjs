@@ -9,6 +9,6 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   output: "server",
   integrations: [vue(), tailwind(), prefetch(), sitemap()],
-  adapter: cloudflare({ mode: "directory" }),
+  adapter: cloudflare(),
   site: "https://account.gravitalia.com/"
 });
