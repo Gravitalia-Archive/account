@@ -6,6 +6,8 @@
     "You can only create an account every 5 minutes": "You can only create an account every 5 minutes",
     "The email address entered is already in use.": "The email address entered is already in use.",
     "Warning!": "Warning!",
+    "Signed in as": "Signed in as",
+    "Logout": "Logout",
     
     "tos": "Terms of Use",
     "tos_date": "Effective Date:",
@@ -127,5 +129,11 @@
     "Update password": "Update password",
     "Passwords do not match": "Passwords do not match",
     "Password confirmation": "Password confirmation",
-    "Update": "Update"
+    "Update": "Update",
+
+    "Delete account": "Delete account",
+    "An error occurred while deleting your account, or obtaining your data. Contact us via privacy@gravitalia.com": "An error occurred while deleting your account, or obtaining your data. Contact us via privacy@gravitalia.com",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.",
+    "Deleting your account will affect all services.": "Deleting your account will affect all services.",
+    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry."
 }

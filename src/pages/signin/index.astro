@@ -66,6 +66,10 @@ if(cookie) {
 <script lang="js">
 	let cf_token = "";
 
+	document.onkeydown = (e) => {
+		if(e.key === "Enter") next();
+	};
+
 	async function next() {
 		document.getElementById("next").disabled = true;
 		if(!document.getElementById("create_acc").classList.value.includes("hidden")) {
@@ -94,6 +98,8 @@ if(cookie) {
 				document.getElementById("back").classList.add("hidden");
 				document.getElementById("enter_mfa").classList.remove("hidden");
 				document.getElementById("email").classList.remove("border-red-500");
+			} else if(call_res === "suspended") {
+				
 			} else if(call_res === "ratelimit") {
 				document.getElementById("ratelimit").classList.remove("hidden");
 				setTimeout(() => {
@@ -131,7 +137,7 @@ if(cookie) {
 				},
 				body: JSON.stringify({
 					email: document.getElementById("email")["value"],
-					password: document.getElementById("password").value === "" ? "Password1234(DontUsePls)" : document.getElementById("password").value,
+					password: document.getElementById("password").value === "" ? "testemail" : document.getElementById("password").value,
 					mfa
 				})
 			})
@@ -144,6 +150,8 @@ if(cookie) {
 					resolve("password");
 				} if(res?.message === "MFA") {
 					resolve("mfa");
+				} else if(res?.message === "Account suspended") {
+					resolve("suspended");
 				} else if(res?.error) {
 					resolve("ratelimit");
 				} else {
@@ -200,7 +208,7 @@ if(cookie) {
 	}
 	
 	function cf_callback(token) {
-		cf_callback = token;
+		cf_token = token;
 	}
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

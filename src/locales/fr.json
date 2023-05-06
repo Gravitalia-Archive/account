@@ -6,6 +6,8 @@
     "You can only create an account every 5 minutes": "Vous ne pouvez créer un compte que toutes les 5 minutes",
     "The email address entered is already in use.": "L'adresse e-mail saisie est déjà utilisée.",
     "Warning!": "Attention !",
+    "Signed in as": "Connecté en tant que",
+    "Logout": "Se déconnecter",
 
     "tos": "Conditions Générales d'Utilisation",
     "tos_date": "Date d’effet :",
@@ -127,5 +129,11 @@
     "Update password": "Mettre à jour le mot de passe",
     "Passwords do not match": "Les mots de passe ne correspondent pas",
     "Password confirmation": "Confirmation du mot de passe",
-    "Update": "Mettre à jour"
+    "Update": "Mettre à jour",
+
+    "Delete account": "Supprimer le compte",
+    "An error occurred while deleting your account, or obtaining your data. Contact us via privacy@gravitalia.com": "Une erreur s'est produite lors de la suppression de votre compte, ou de l'obtention de vos données. Contactez-nous via privacy@gravitalia.com",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Faire cette action supprimera INSTANTANÉMENT et automatiquement TOUTES les données des services associés à votre compte. Vous aurez la possibilité de récupérer votre compte principal sous 30 jours.",
+    "Deleting your account will affect all services.": "Supprimer votre compte affectera tous les services.",
+    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "Tous les comptes des autres services seront entièrement supprimés (commentaires, publications...), et sans délais. Pour procéder, tapez votre mot de passe dans l'entrée suivante."
 }
