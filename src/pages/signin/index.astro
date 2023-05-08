@@ -30,8 +30,8 @@ if(cookie) {
 		<div class="p-11 border-[1px] -mt-10 border-none lg:border-solid border-slate-200 dark:border-zinc-800 dark:bg-zinc-800 rounded-md flex flex-col items-center space-y-3 shadow-sm">
 			<br />
 			<img width="30" height="30" draggable="false" alt="Gravitalia logo" src="/favicon.webp" />
-			<p class="text-lg font-semibold">{t("Let us connect you!", locale)}</p>
-			<p class="hidden text-lg font-semibold">{t("Your two-factor code", locale)}</p>
+			<p id="slogan" class="text-lg font-semibold">{t("Let us connect you!", locale)}</p>
+			<p id="2fa" class="hidden text-lg font-semibold">{t("Your two-factor code", locale)}</p>
 			<br /><br />
 			<label for="email" id="invalid_email_label" class="hidden text-sm text-red-500 w-full">{t("Invalid email", locale)}</label>
 			<input id="email" type="email" class="p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80" placeholder={t("Email adress", locale)} />
@@ -41,12 +41,15 @@ if(cookie) {
 				<a href="/signin/password" rel="prefetch" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">{t("Forgot your password?", locale)}</a>
 			</div>
 			<div id="enter_mfa" class="hidden flex">
-				<input autofocus id="1" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+				<input id="1" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeypress="mfa_keypress" autofocus />
 				<input id="2" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 				<input id="3" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 				<input id="4" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 				<input id="5" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
 				<input id="6" class="h-12 w-10 border mx-1 rounded-lg flex items-center text-center font-thin text-3xl" maxlength="1" max="9" min="0" inputmode="decimal" onkeydown="mfa_keypress" />
+			</div>
+			<div id="suspended_acc" class="hidden">
+				<p class="text-sm max-w-xs">{t("We are sorry, but your account has been suspended. For more information, please contact us at contact@gravitalia.com. The internal procedure is almost the same as for an account deletion. Thus, all sensitive data (except email) will be deleted.", locale)}</p>
 			</div>
 			<div class="flex justify-between w-full">
 				<a href={`/signup${Astro.url.searchParams.get("redirect") ? `?redirect=${encodeURIComponent(Astro.url.searchParams.get("redirect")||"")}` : ""}`} rel="prefetch" id="create_acc" class="text-sm px-2 py-2 bg-indigo-50 dark:bg-opacity-0 dark:border-none outline-none border border-indigo-100 rounded text-indigo-500 dark:text-white font-medium hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:text-white transition-colors duration-200">
@@ -69,6 +72,9 @@ if(cookie) {
 	document.onkeydown = (e) => {
 		if(e.key === "Enter") next();
 	};
+	for(id of ["1", "2", "3", "4", "5", "6"]) {
+		document.getElementById(id).onkeydown = mfa_keypress
+	}
 
 	async function next() {
 		document.getElementById("next").disabled = true;
@@ -89,21 +95,33 @@ if(cookie) {
 		} else {
 			const call_res = await login();
 			if(call_res === "password") {
+				turnstile.reset();
 				document.getElementById("password").classList.remove("border-slate-500", "dark:border-zinc-800");
 				document.getElementById("password").classList.add("border-red-500");
 				document.getElementById("invalid_password_label").classList.remove("hidden");
 			} else if(call_res === "mfa") {
+				turnstile.reset();
 				document.getElementById("psw").classList.add("hidden");
 				document.getElementById("next").classList.add("hidden");
-				document.getElementById("back").classList.add("hidden");
+				document.getElementById("back_btn").classList.add("hidden");
+				document.getElementById("email").classList.add("hidden");
+				document.getElementById("create_acc").classList.add("hidden");
+				document.getElementById("slogan").classList.add("hidden");
+				document.getElementById("2fa").classList.remove("hidden");
 				document.getElementById("enter_mfa").classList.remove("hidden");
-				document.getElementById("email").classList.remove("border-red-500");
 			} else if(call_res === "suspended") {
-				
+				document.getElementById("psw").classList.add("hidden");
+				document.getElementById("next").classList.add("hidden");
+				document.getElementById("back_btn").classList.add("hidden");
+				document.getElementById("email").classList.add("hidden");
+				document.getElementById("create_acc").classList.add("hidden");
+				document.getElementById("suspended_acc").classList.remove("hidden");
 			} else if(call_res === "ratelimit") {
+				turnstile.reset();
 				document.getElementById("ratelimit").classList.remove("hidden");
 				setTimeout(() => {
 					document.getElementById("ratelimit").classList.add("hidden");
+					turnstile.reset();
 				}, 5000*60)
 			}
 		}
@@ -124,8 +142,7 @@ if(cookie) {
 		return new Promise(async (resolve, reject) => {
 			if(cf_token.length === 0) {
 				const MATCH = document.getElementById("CF-Token-Generator").innerHTML.match(/value=".*">/gm);
-				if(!MATCH) setTimeout(() => {return login(mfa)}, 1000);
-				else cf_token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
+				if(MATCH) cf_token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
 			}
 
 			if(document.getElementById("email").value === "") return resolve("email");
@@ -187,15 +204,32 @@ if(cookie) {
 			}
 		} else if([ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ].includes(event.key)) {
 			let Id = parseInt(event.target.id);
+			console.log(parseInt(event.target.id))
 			if(Id === 6) {
 				let code = "";
 				for(let i = 1; i < 6; i++) {
-					code += document.getElementById(`${i}`)["value"];
+					code += document.getElementById(`${i}`).value;
 				}
 				if(code.length === 6) {
 					const call_res = await login(code);
 					if(call_res !== "mfa") {
-						window.location.href = `/signin/next?token=${call_res}`;
+						document.cookie = `session=${res.message}; max-age=5256000; SameSite=strict; secure;`;
+						setTimeout(() => {
+							const params = new Proxy(new URLSearchParams(window.location.search), {
+								get: (searchParams, prop) => searchParams.get(prop),
+							});
+
+							if(params?.redirect) {
+								let url = decodeURIComponent(params.redirect)
+								if (!url.includes("http")) {
+									window.location.href = url;
+								} else {
+									window.location.href = "/";
+								}
+							} else {
+								window.location.href = "/";
+							}
+						}, 500)
 					}
 				}
 			} else {
