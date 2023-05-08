@@ -78,6 +78,10 @@ if(cookie) {
 <script lang="js">
 	let cf_token = "";
 
+	document.onkeydown = (e) => {
+		if(e.key === "Enter") next();
+	};
+
 	async function next() {
 		if(!document.getElementById("first").classList.value.includes("hidden")) {
 			if(!document.getElementById("firstname").value || document.getElementById("firstname").value.length >= 16) {
@@ -170,8 +174,7 @@ if(cookie) {
 		return new Promise(async (resolve, reject) => {
 			if(cf_token.length === 0) {
 				const MATCH = document.getElementById("CF-Token-Generator").innerHTML.match(/value=".*">/gm);
-				if(!MATCH) setTimeout(() => {return create()}, 1000);
-				else cf_token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
+				if(MATCH) cf_token = MATCH[0]?.replace(/value="/g, "")?.replace(/">/g, "");
 			}
 
 			if(document.getElementById("email").value === "") return resolve("email");
