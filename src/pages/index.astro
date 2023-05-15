@@ -59,7 +59,7 @@ if(cookie) {
 	
 			<div class="w-full p-4">
 				<p class="text-2xl font-semibold pb-4">{t("Your public profile", locale)}</p>
-				<div class="pt-4 pl-4 pr-4 border dark:border-none dark:bg-zinc-800 shadow-xs w-1/2 h-96 rounded-md">
+				<div class="pt-4 pl-4 pr-4 border dark:border-none dark:bg-zinc-800 shadow-xs w-full md:w-4/5 lg:w-1/2 h-64 lg:h-96 rounded-md">
 					<div class="space-y-4">
 						<div class="flex justify-center">
 							<input type="file" accept="image/*" id="avatar_input" class="hidden" />
@@ -86,7 +86,7 @@ if(cookie) {
 							</div>
 						</div>
 					</div>
-					<div class="pt-32"><button onclick="save()" class="mt-auto w-full py-2 bg-green-500 hover:bg-green-700 transition-colors duration-300 text-white rounded-md">{t("Save", locale)}</button></div>
+					<div class="pt-4 lg:pt-32"><button onclick="save()" class="mt-auto h-full w-full py-2 bg-green-500 hover:bg-green-700 transition-colors duration-300 text-white rounded-md">{t("Save", locale)}</button></div>
 				</div>
 			</div>
 
