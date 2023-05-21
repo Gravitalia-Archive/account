@@ -136,5 +136,16 @@
     "An error occurred while deleting your account, or obtaining your data. Contact us via privacy@gravitalia.com": "Une erreur s'est produite lors de la suppression de votre compte, ou de l'obtention de vos données. Contactez-nous via privacy@gravitalia.com",
     "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Faire cette action supprimera INSTANTANÉMENT et automatiquement TOUTES les données des services associés à votre compte. Vous aurez la possibilité de récupérer votre compte principal sous 30 jours.",
     "Deleting your account will affect all services.": "Supprimer votre compte affectera tous les services.",
-    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "Tous les comptes des autres services seront entièrement supprimés (commentaires, publications...), et sans délais. Pour procéder, tapez votre mot de passe dans l'entrée suivante."
+    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "Tous les comptes des autres services seront entièrement supprimés (commentaires, publications...), et sans délais. Pour procéder, tapez votre mot de passe dans l'entrée suivante.",
+
+    "Update personal data": "Mettre à jour les informations personnelles",
+    "Update email": "Changer l'e-mail",
+    "Update birthdate": "Changer la date de naissance",
+    "You must have at least 13 years old.": "Vous devez au moins avoir 15 ans.",
+    "New password": "Nouveau mot de passe",
+    "Actual password": "Mot de passe actuel",
+    "Birthday": "Anniversaire",
+    "Phone": "Numéro de tél.",
+    "Update your email address": "Changer votre adresse e-mail",
+    "Not set": "Non renseigné"
 }
