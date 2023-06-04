@@ -132,7 +132,7 @@ if(cookie) {
 				if (file.type.startsWith('image/')) {
 					const reader = new FileReader();
 
-					reader.onload = (event) => {
+					reader.onload = async (event) => {
 						document.getElementById("avatar").src = event.target.result;
 					};
 
@@ -168,7 +168,7 @@ if(cookie) {
 		}
 	}
 
-	function save() {
+	async function save() {
 		fetch("https://oauth.gravitalia.com/users/@me", {
 			method: "PATCH",
 			headers: {
@@ -176,7 +176,8 @@ if(cookie) {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				username: document.getElementById("username").innerText
+				username: document.getElementById("username").innerText,
+				avatar: document.getElementById("avatar").src.includes("data:image/") ? Array.from(new Uint8Array(await (await fetch(document.getElementById("avatar").src)).arrayBuffer())) : null
 			})
 		}).then(res => res.json())
 		.then(res => {
