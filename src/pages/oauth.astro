@@ -34,7 +34,7 @@ if(cookie) {
 
 			<div class="relative pr-10 pt-2">
 				<button aria-label="User menu" class="flex rounded-full text-sm focus:outline-none" onclick="document.getElementById('show-profile').classList.value.includes('hidden')?document.getElementById('show-profile').classList.remove('hidden'):document.getElementById('show-profile').classList.add('hidden')">
-					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} class="h-8 w-8 rounded-full" alt="" />
+					<img src={user.avatar ? import.meta.env.CDN_URL+"/t_avatar/"+user.avatar+".webp" : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} class="h-8 w-8 rounded-full" alt="" />
 				</button>
 
 				<div class="pt-1">
