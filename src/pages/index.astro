@@ -34,7 +34,7 @@ if(cookie) {
 
 			<div class="relative pr-10 pt-2">
 				<button aria-label="User menu" class="flex rounded-full text-sm focus:outline-none" onclick="document.getElementById('show-profile').classList.value.includes('hidden')?document.getElementById('show-profile').classList.remove('hidden'):document.getElementById('show-profile').classList.add('hidden')">
-					<img src={user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} class="h-8 w-8 rounded-full" alt="" />
+					<img src={user.avatar ? import.meta.env.CDN_URL+"/t_avatar/"+user.avatar+".webp" : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} class="h-8 w-8 rounded-full" alt="" />
 				</button>
 
 				<div class="pt-1">
@@ -64,7 +64,7 @@ if(cookie) {
 						<div class="flex justify-center">
 							<input type="file" accept="image/*" id="avatar_input" class="hidden" />
 							<div onclick="avatar_picker()" class="flex -space-x-32 cursor-pointer">
-								<img id="avatar" onmouseenter="document.getElementById('avatar_hover').classList.remove('hidden')" class="rounded-full w-32 h-32" src= {user.avatar ? `https://cdn.gravitalia.com/${user.avatar}` : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} alt="" />
+								<img id="avatar" onmouseenter="document.getElementById('avatar_hover').classList.remove('hidden')" class="rounded-full w-32 h-32" src= {user.avatar ? import.meta.env.CDN_URL+"/t_avatar/"+user.avatar+".webp" : `https://www.gravitalia.com/avatar/${user.username[0].match(/[A-z]/) ? user.username[0].toUpperCase() : "A"}.webp`} alt="" />
 								<div id="avatar_hover" onmouseleave="document.getElementById('avatar_hover').classList.add('hidden')" class="hidden w-32 h-32 bg-zinc-700/60 rounded-full inset-0 flex justify-center items-center text-white">
 									<p class="pl-2 text-white font-bold text-sm z-40 mix-blend-normal">Upload image</p>
 								</div>
