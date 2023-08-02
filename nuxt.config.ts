@@ -32,12 +32,20 @@ export default defineNuxtConfig({
         }
     },
 
-    ssr: false,
+    ssr: true,
     components: true,
     modules: [
         "@nuxtjs/tailwindcss",
+        "@pinia/nuxt",
+        ["@nuxtjs/turnstile", {
+            siteKey: "0x4AAAAAAABG7Pcx4-fniaty"
+        }],
         ["@nuxtjs/i18n", {
             defaultLocale: "en",
+            compilation: {
+                strictMessage: false,
+                escapeHtml: true
+            },
             strategy: "no_prefix",
             lazy: false,
             langDir: "lang",
@@ -75,6 +83,14 @@ export default defineNuxtConfig({
             storageKey: 'mode'
         }]
     ],
+
+    imports: {
+        dirs: ['./stores'],
+    },
+    
+    pinia: {
+        autoImports: ['defineStore', 'acceptHMRUpdate'],
+    },
 
     runtimeConfig: {
         public: {
