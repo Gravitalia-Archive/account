@@ -8,7 +8,7 @@
 					<div class="space-y-4">
 						<div class="flex justify-center">
 							<div @click="avatarPicker" class="flex -space-x-32 cursor-pointer">
-								<img @mouseover="avatarHoverShown = true" class="rounded-full w-32 h-32" :src="image.includes('data:image/') ? image : image !== '' ? runtimeConfig.CDN_URL+'/t_avatar/'+image+'.webp' : `https://www.gravitalia.com/avatar/${user?.username ? user?.username[0].match(/[A-z]/) ? user?.username[0]?.toUpperCase() : 'A' : 'A'}.webp`" />
+								<img @mouseover="avatarHoverShown = true" class="rounded-full w-32 h-32" :src="image.includes('data:image/') ? image : user.avatar ? runtimeConfig.CDN_URL+'/t_avatar/'+user.avatar+'.webp' : `https://www.gravitalia.com/avatar/${user?.username ? user?.username[0].match(/[A-z]/) ? user?.username[0]?.toUpperCase() : 'A' : 'A'}.webp`" />
 								<div @mouseleave="avatarHoverShown = false" :class="avatarHoverShown ? 'w-32 h-32 bg-zinc-700/60 rounded-full inset-0 flex justify-center items-center text-white' : 'hidden'">
 									<p class="pl-2 text-white font-bold text-sm z-40 mix-blend-normal">
                                         {{ $t("Upload image") }}
@@ -129,7 +129,7 @@ useHead({
             }
         },
 
-        async mounted() {
+        async serverPrefetch() {
             // Fetch user
             await this.user.fetchUser(true);
 
