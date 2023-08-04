@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div v-if="openedUsernameModal" class=" fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center" style="background: rgba(0,0,0,.7);">
+    <div v-if="openedUsernameModal" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center" style="background: rgba(0,0,0,.7);">
 		<div class="border-none shadow-lg bg-white dark:bg-zinc-900 w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
 			<div class="py-4 text-left px-6">
 				<div class="flex justify-between items-center">
@@ -177,7 +177,7 @@ useHead({
                 headers.append("Authorization", this.token || "");
                 headers.append("Content-Type", "application/json");
 
-                fetch("https://oauth.gravitalia.com/users/@me", {
+                fetch(`${this.runtimeConfig.API_URL || "https://oauth.gravitalia.com"}/users/@me`, {
                     method: "PATCH",
                     headers,
                     body: JSON.stringify({
@@ -206,7 +206,7 @@ useHead({
                 headers.append("Authorization", this.token || "");
                 headers.append("Content-Type", "application/json");
 
-                fetch("https://oauth.gravitalia.com/users/@me", {
+                fetch(`${this.runtimeConfig.API_URL || "https://oauth.gravitalia.com"}/users/@me`, {
                     method: "PATCH",
                     headers,
                     body: JSON.stringify({
