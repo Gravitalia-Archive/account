@@ -267,5 +267,16 @@
     "Save": "Save",
     "An error has occurred": "An error has occurred",
 
-    "No authorized application": "No authorized application"
+    "No authorized application": "No authorized application",
+
+    "Delete your account": "Delete your account",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will be able to recover your main account within 30 days.": "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will be able to recover your main account within 30 days.",
+    "Delete account": "Delete account",
+    "Download my data": "Download my data",
+    "Data can be downloaded every 48 hours. They do not include data from the services you use.": "Data can be downloaded every 48 hours. They do not include data from the services you use.",
+    "Deleting your account will affect all services.": "Deleting your account will affect all services.",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.",
+    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.",
+    "Confirm": "Confirm",
+    "Download": "Download"
 }

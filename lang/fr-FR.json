@@ -267,5 +267,16 @@
     "Save": "Sauvegarder",
     "An error has occurred": "Une erreur s'est produite",
 
-    "No authorized application": "Aucune application autorisée"
+    "No authorized application": "Aucune application autorisée",
+
+    "Delete your account": "Supprimer son compte",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will be able to recover your main account within 30 days.": "Faire cette action supprimera INSTANTANÉMENT et automatiquement TOUTES les données des services associés à votre compte. Vous aurez la possibilité de récupérer votre compte principal sous 30 jours.",
+    "Delete account": "Supprimer le compte",
+    "Download my data": "Télécharger mes données",
+    "Data can be downloaded every 48 hours. They do not include data from the services you use.": "Les données sont téléchargeables toutes les 48 heures. Elles n'incluent pas les données des services que vous utilisez.",
+    "Deleting your account will affect all services.": "Supprimer votre compte affectera tous les services.",
+    "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Faire cette action supprimera INSTANTANÉMENT et automatiquement TOUTES les données des services associés à votre compte. Vous aurez la possibilité de récupérer votre compte principal sous 30 jours.",
+    "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "Tous les comptes des autres services seront entièrement supprimés (commentaires, publications...), et sans délais. Pour procéder, tapez votre mot de passe dans l'entrée suivante.",
+    "Confirm": "Confirmer",
+    "Download": "Télécharger"
 }
