@@ -3,7 +3,7 @@
 
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 h-[96vh] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-            <div class="w-full max-w-xl bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
+            <div class="w-full max-w-xl 2xl:max-w-2xl bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
                 <div class="pt-6 flex flex-col items-center pb-10">
 					<div class="space-y-4">
 						<div class="flex justify-center">
@@ -129,16 +129,11 @@ useHead({
             }
         },
 
-        async serverPrefetch() {
+        async mounted() {
             // Fetch user
             await this.user.fetchUser(true);
 
-            // Redirect user if connected
-            if(!this.token || this.user.vanity === "") {
-                await navigateTo("/signin");
-            } else {
-                this.image = this.user.avatar;
-            }
+            this.image = this.user.avatar;
         },
 
         methods: {

@@ -14,16 +14,6 @@
 </template>
 
 <script setup>
-const user = useUser();
-
-// Fetch user
-await user.fetchUser();
-
-// Redirect user if connected
-if(useCookie("session").value && user.vanity === "") {
-    await navigateTo("/signin");
-}
-
 useHead({
     htmlAttrs: {
         lang: useI18n().locale

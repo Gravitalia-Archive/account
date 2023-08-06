@@ -10,37 +10,41 @@
         <div class="p-4 border-2 h-[96vh] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
                 <div>
-                    <h3 class="font-semibold text-lg">
+                    <h3 class="font-semibold text-lg pb-2">
                         {{ $t("Delete your account") }}
                     </h3>
 
-                    <div class="w-full px-4 max-h-60 md:max-h-48 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
+                    <div class="w-full px-4 max-h-60 md:max-h-48 2xl:w-3/4 2xl:max-h-60 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
                         <div class="pt-6 flex flex-col items-center pb-10">
                             <p class="text-sm text-gray-700 dark:text-white">
                                 {{ $t("Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will be able to recover your main account within 30 days.") }}
                             </p>
                         
-                            <button @click="isError.password = false; openedDeleteModal = !openedDeleteModal" class="mt-11 text-sm mt-auto w-full py-2 bg-red-50 dark:bg-opacity-0 dark:border-none outline-none border border-red-100 rounded text-red-500 dark:text-white font-medium hover:bg-red-400 dark:hover:bg-red-500 hover:text-white transition-colors duration-200">
-                                {{ $t("Delete account") }}
-                            </button>
+                            <div class="pt-11 2xl:pt-20 w-full">
+                                <button @click="isError.password = false; openedDeleteModal = !openedDeleteModal" class="text-sm mt-auto w-full py-2 bg-red-50 dark:bg-opacity-0 dark:border-none outline-none border border-red-100 rounded text-red-500 dark:text-white font-medium hover:bg-red-400 dark:hover:bg-red-500 hover:text-white transition-colors duration-200">
+                                    {{ $t("Delete account") }}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="font-semibold text-lg">
+                    <h3 class="font-semibold text-lg pb-2">
                         {{ $t("Download my data") }}
                     </h3>
 
-                    <div class="w-full px-4 max-h-60 md:max-h-48 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
+                    <div class="w-full px-4 max-h-60 md:max-h-48 2xl:w-3/4 2xl:max-h-60 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
                         <div class="pt-6 flex flex-col items-center pb-10">
                             <p class="text-sm text-gray-700 dark:text-white">
                                 {{ $t("Data can be downloaded every 48 hours. They do not include data from the services you use.") }}
                             </p>
-                        
-                            <button @click="isError.password = false; openedDownloadModal = !openedDownloadModal" class="mt-11 md:mt-16 my-4 text-sm mt-auto w-full py-2 bg-violet-100 dark:bg-opacity-0 dark:border-none outline-none border border-violet-100 rounded text-violet-500 dark:text-white font-medium hover:bg-violet-400 dark:hover:bg-violet-500 hover:text-white transition-colors duration-200">
-                                {{ $t("Download my data") }}
-                            </button>
+                            
+                            <div class="pt-12 2xl:pt-24 w-full">
+                                <button @click="isError.password = false; openedDownloadModal = !openedDownloadModal" class="text-sm mt-auto w-full py-2 bg-violet-100 dark:bg-opacity-0 dark:border-none outline-none border border-violet-100 rounded text-violet-500 dark:text-white font-medium hover:bg-violet-400 dark:hover:bg-violet-500 hover:text-white transition-colors duration-200">
+                                    {{ $t("Download my data") }}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,13 +203,6 @@ useHead({
         async mounted() {
             // Fetch user
             await this.user.fetchUser(true);
-
-            // Redirect user if connected
-            if(!useCookie("session").value || this.user.vanity === "") {
-                await navigateTo("/signin");
-            } else {
-                this.image = this.user.avatar;
-            }
         },
 
         methods: {
