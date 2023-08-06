@@ -20,7 +20,7 @@
             <div :class="level === 1 ? 'flex flex-col space-y-1' : 'hidden'">
                 <input id="password" type="password" v-model="password" :class="isError.invalidPassword ? 'border-red-500 p-2 border-[1px] dark:bg-zinc-900 rounded w-80' : 'p-2 border-[1px] border-slate-500 dark:bg-zinc-900 dark:border-zinc-800 rounded w-80'" :placeholder="$t('Password')" />
 
-                <NuxtLink to="/sign-in/password" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">
+                <NuxtLink to="/signin/password" class="text-sm text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 w-1/2">
                     {{ $t("Forgot your password?") }}
                 </NuxtLink>
             </div>
