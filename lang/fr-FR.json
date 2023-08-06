@@ -226,7 +226,7 @@
     "Email address": "Adresse e-mail",
     "Password": "Mot de passe",
 
-    "We are sorry, but your account has been suspended. For more information, please contact us. The internal procedure is almost the same as for an account deletion. Thus, all sensitive data will be deleted.": "Nous sommes désolés, mais votre compte a été suspendu. Pour plus d'informations, veuillez nous contacter. La procédure interne est pratiquement la même que pour la suppression d'un compte. Ainsi, toutes les données sensibles seront supprimées.",
+    "We're sorry, but your account has been suspended. For more information, please contact us by e-mail. The internal procedure is practically the same as for deleting an account. All sensitive data will be deleted after 60 days.": "Nous sommes désolés, mais votre compte a été suspendu. Pour plus d'informations, veuillez nous contacter par e-mail. La procédure interne est pratiquement la même que pour la suppression d'un compte. Ainsi, toutes les données sensibles seront supprimées au bout de 60 jours.",
 
     "Firstname": "Prénom",
     "Name": "Nom",
@@ -290,5 +290,9 @@
     "Update password": "Mettre à jour votre mot de passe",
     "You must have at least 13 years old.": "Vous devez avoir au moins 15 ans.",
     "The email address entered is already in use.": "L'adresse e-mail est déjà utilisée.",
-    "Actual password": "Mot de passe actuel"
+    "Actual password": "Mot de passe actuel",
+
+    "Forgotten password": "Mot de passe oublié",
+    "To recover your password, please contact us using the e-mail address for your account. You can reach us via:": "Pour récupérer votre mot de passe, veuillez nous contacter avec l'adresse e-mail de votre compte. Joignez-nous via :",
+    "If you no longer have access to your e-mail address, contact us by the same means, and we'll start another procedure!": "Si vous n'avez plus accès à votre adresse e-mail, contactez nous par le même biais, une autre procédure sera alors enclenchée !"
 }

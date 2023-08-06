@@ -226,7 +226,7 @@
     "Email address": "Email address",
     "Password": "Password",
 
-    "We are sorry, but your account has been suspended. For more information, please contact us. The internal procedure is almost the same as for an account deletion. Thus, all sensitive data will be deleted.": "We are sorry, but your account has been suspended. For more information, please contact. The internal procedure is almost the same as for an account deletion. Thus, all sensitive data will be deleted.",
+    "We're sorry, but your account has been suspended. For more information, please contact us by e-mail. The internal procedure is practically the same as for deleting an account. All sensitive data will be deleted after 60 days.": "We're sorry, but your account has been suspended. For more information, please contact us by e-mail. The internal procedure is practically the same as for deleting an account. All sensitive data will be deleted after 60 days.",
 
     "Firstname": "Firstname",
     "Name": "Name",
@@ -290,5 +290,9 @@
     "Update password": "Update password",
     "You must have at least 13 years old.": "You must have at least 13 years old.",
     "The email address entered is already in use.": "The email address entered is already in use.",
-    "Actual password": "Actual password"
+    "Actual password": "Actual password",
+
+    "Forgotten password": "Forgotten password",
+    "To recover your password, please contact us using the e-mail address for your account. You can reach us via:": "To recover your password, please contact us using the e-mail address for your account. You can reach us via:",
+    "If you no longer have access to your e-mail address, contact us by the same means, and we'll start another procedure!": "If you no longer have access to your e-mail address, contact us by the same means, and we'll start another procedure!"
 }
