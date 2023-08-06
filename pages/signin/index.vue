@@ -33,7 +33,7 @@
             <!-- Account suspension message -->
             <div v-if="isError.suspendedAccount">
 				<p class="text-sm max-w-xs">
-                    {{ $t("We are sorry, but your account has been suspended. For more information, please contact us at contact@gravitalia.com. The internal procedure is almost the same as for an account deletion. Thus, all sensitive data (except email) will be deleted.") }}
+                    {{ $t("We're sorry, but your account has been suspended. For more information, please contact us by e-mail. The internal procedure is practically the same as for deleting an account. All sensitive data will be deleted after 60 days.") }}
                 </p>
 			</div>
 
