@@ -278,5 +278,17 @@
     "Doing so will INSTANTLY and automatically delete ALL service data associated with your account. You will have the option of recovering your main account within 30 days.": "Faire cette action supprimera INSTANTANÉMENT et automatiquement TOUTES les données des services associés à votre compte. Vous aurez la possibilité de récupérer votre compte principal sous 30 jours.",
     "All accounts of other services will be completely deleted (comments, publications...), and without delay. To proceed, type your password in the following entry.": "Tous les comptes des autres services seront entièrement supprimés (commentaires, publications...), et sans délais. Pour procéder, tapez votre mot de passe dans l'entrée suivante.",
     "Confirm": "Confirmer",
-    "Download": "Télécharger"
+    "Download": "Télécharger",
+
+    "Update personal data": "Mettre à jour les informations personnelles",
+    "Update your email address": "Mettre à jour votre adresse e-mail",
+    "Birthday": "Date d'anniversaire",
+    "Not set": "Non défini",
+    "New password": "Nouveau mot de passe",
+    "Update email": "Mettre à jour l'adresse e-mail",
+    "Update birthdate": "Mettre à jour votre date d'anniversaire",
+    "Update password": "Mettre à jour votre mot de passe",
+    "You must have at least 13 years old.": "Vous devez avoir au moins 15 ans.",
+    "The email address entered is already in use.": "L'adresse e-mail est déjà utilisée.",
+    "Actual password": "Mot de passe actuel"
 }
