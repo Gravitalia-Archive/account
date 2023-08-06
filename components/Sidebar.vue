@@ -59,7 +59,7 @@
                     </NuxtLink>
                 </li>
                 <li>
-                    <button @click="user.logout(); window.location.href = '/'" class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <button @click="logout" class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="flex-shrink-0 w-6 h-6 fill-gray-500 transition duration-75 dark:fill-gray-400 group-hover:fill-gray-900 dark:group-hover:fill-white">
                             <path d="M5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2ZM9 11V8L4 12L9 16V13H15V11H9Z"></path>
                         </svg>
@@ -74,9 +74,11 @@
                         {{ $t("Beta") }}
                     </span>
                 </div>
+
                 <p class="mb-3 text-sm text-blue-800 dark:text-white">
                     {{ $t("Gravitalia Account gives you access to new features and makes your account more secure!") }}
                 </p>
+
                 <NuxtLink class="text-sm text-blue-800 underline font-medium hover:text-blue-900 dark:text-white dark:hover:text-gray-100" to="mailto:contact@gravitalia.com">
                     {{ $t("Found bug?") }}
                 </NuxtLink>
@@ -93,6 +95,14 @@ await user.fetchUser();
 
 // Redirect user if connected
 if(!useCookie("session").value || user.vanity === "") {
+    await navigateTo("/signin");
+}
+
+async function logout() {
+    // Remove token and cache
+    user.logout();
+
+    // Redirect to connection page
     await navigateTo("/signin");
 }
 </script>
